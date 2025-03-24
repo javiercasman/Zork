@@ -3,8 +3,16 @@
   "WorkspaceRootPath": "E:\\M\u00C1STER\\Online test\\Zork\\Zork\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{709D49CB-B686-41F0-A4B3-E85D03D26A28}|Zork.vcxproj|E:\\M\u00C1STER\\Online test\\Zork\\Zork\\Zork.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{709D49CB-B686-41F0-A4B3-E85D03D26A28}|Zork.vcxproj|solutionrelative:Zork.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\M\u00C1STER\\Online test\\Zork\\Zork\\World.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:World.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\M\u00C1STER\\Online test\\Zork\\Zork\\Entity.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Entity.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\M\u00C1STER\\Online test\\Zork\\Zork\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,19 +22,45 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Entity.h",
+              "DocumentMoniker": "E:\\M\u00C1STER\\Online test\\Zork\\Zork\\Entity.h",
+              "RelativeDocumentMoniker": "Entity.h",
+              "ToolTip": "E:\\M\u00C1STER\\Online test\\Zork\\Zork\\Entity.h",
+              "RelativeToolTip": "Entity.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-03-24T10:14:40.708Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Zork.cpp",
-              "DocumentMoniker": "E:\\M\u00C1STER\\Online test\\Zork\\Zork\\Zork.cpp",
-              "RelativeDocumentMoniker": "Zork.cpp",
-              "ToolTip": "E:\\M\u00C1STER\\Online test\\Zork\\Zork\\Zork.cpp",
-              "RelativeToolTip": "Zork.cpp",
+              "Title": "World.h",
+              "DocumentMoniker": "E:\\M\u00C1STER\\Online test\\Zork\\Zork\\World.h",
+              "RelativeDocumentMoniker": "World.h",
+              "ToolTip": "E:\\M\u00C1STER\\Online test\\Zork\\Zork\\World.h",
+              "RelativeToolTip": "World.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-03-24T10:14:40.898Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "main.cpp",
+              "DocumentMoniker": "E:\\M\u00C1STER\\Online test\\Zork\\Zork\\main.cpp",
+              "RelativeDocumentMoniker": "main.cpp",
+              "ToolTip": "E:\\M\u00C1STER\\Online test\\Zork\\Zork\\main.cpp",
+              "RelativeToolTip": "main.cpp",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-03-24T09:34:41.199Z",
+              "WhenOpened": "2025-03-24T10:14:40.809Z",
               "EditorCaption": ""
             }
           ]

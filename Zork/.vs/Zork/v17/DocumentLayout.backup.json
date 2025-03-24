@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\M\u00C1STER\\Online test\\Zork\\Zork\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{709D49CB-B686-41F0-A4B3-E85D03D26A28}|Zork.vcxproj|E:\\M\u00C1STER\\Online test\\Zork\\Zork\\Zork.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{709D49CB-B686-41F0-A4B3-E85D03D26A28}|Zork.vcxproj|solutionrelative:Zork.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Zork.cpp",
+              "DocumentMoniker": "E:\\M\u00C1STER\\Online test\\Zork\\Zork\\Zork.cpp",
+              "RelativeDocumentMoniker": "Zork.cpp",
+              "ToolTip": "E:\\M\u00C1STER\\Online test\\Zork\\Zork\\Zork.cpp",
+              "RelativeToolTip": "Zork.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-03-24T09:34:41.199Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
