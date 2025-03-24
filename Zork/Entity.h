@@ -10,6 +10,9 @@ enum EntityType { NPC, PLAYER, EXIT, ROOM, ITEM };
 
 class Entity {
 public:
+
+	virtual ~Entity() {}
+
 	EntityType type;
 	string name;
 	string description;

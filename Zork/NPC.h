@@ -4,7 +4,8 @@
 using namespace std;
 
 class NPC : public Creature {
-
+	NPC(const string* name, const string* description, Entity* parent, Room* location);
+	~NPC();
 };
 
 #endif //_NPC_INCLUDE

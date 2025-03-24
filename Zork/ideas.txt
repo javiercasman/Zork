@@ -1,5 +1,6 @@
 1. hacer un bool en "Item" que determine si puede contener Items dentro o no (p.e. una espada no puede, un saco sí)
 2. implementar algo en "Exit" que represente si necesita una llave o no
+3. que el arma brille cuando el enemigo esté en una habitación connexa a la que estás. que brille mucho cuando esté en la misma.
 
 
 "contains" de Player == inventario. Es decir, solo puede contener Item (?)
@@ -29,4 +30,51 @@ una jerarquía de entidades, como un arbol.
 											Lámpara     Llave
 
 
-Ahora imagínate que abro el saco y saco la espada. Espada sería una entidad más en Room, al mismo nivel que Saco marrón y Player. Es decir, quitaríamos la espada del vector de entidades de saco marrón y la meteríamos en Room. O imagínate que dropeo la lámpara, pues igual, la quitariamos del vector de entidades de player y la meteríamos en el de Room. Tendríamos que hacer un método (no sé si en World o Entity) que actualice el contain al que pertenece cada objeto cuando interactuamos con él. Para esto habría que indicar el Parent de cada entidad, para saber donde ir. Por ejemplo, dropeo la lámpara, decimos "Cuál es el parent de Lámpara?" Player. Vale, "cuál es el parent de Player?" Room. Vale, pues si dropeo la lámpara, pasará a formar parte del Parent de su Parent, es decir, de Room. Otra cosa a tener en cuenta es que cada instancia por ejemplo de Exit JAMÁS pasará a formar parte de otro vector de entidades, siempre se quedará en el de Room, ya que no podemos modificar la exit, es una puerta sabes? Claro, pues esa es la función Update, acabo de caer no? Podemos convertirla en pura.
+Ahora imagínate que abro el saco y saco la espada. Espada sería una entidad más en Room, al mismo nivel que Saco marrón y Player. Es decir, quitaríamos la espada del vector de entidades de saco marrón y la meteríamos en Room. O imagínate que dropeo la lámpara, pues igual, la quitariamos del vector de entidades de player y la meteríamos en el de Room. Tendríamos que hacer un método (no sé si en World o Entity) que actualice el contain al que pertenece cada objeto cuando interactuamos con él. Para esto habría que indicar el Parent de cada entidad (el padre en el árbol), para saber donde ir. Por ejemplo, dropeo la lámpara, decimos "Cuál es el parent de Lámpara?" Player. Vale, "cuál es el parent de Player?" Room. Vale, pues si dropeo la lámpara, pasará a formar parte del Parent de su Parent, es decir, de Room. Otra cosa a tener en cuenta es que cada instancia por ejemplo de Exit JAMÁS pasará a formar parte de otro vector de entidades, siempre se quedará en el de Room, ya que no podemos modificar la exit, es una puerta sabes? Claro, pues esa es la función Update, acabo de caer no? Podemos convertirla en pura.
+
+O por ejemplo, si queremos hacer un NPC que cambie de Room segun el turno, se tendrá que cambiar el parent a otra Room.
+
+Al final de cada "turno", haces Update y asignas (según qué entidades) las entidades a la lista contain de sus parents.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+DESCRIPCIONES DE EXITS (made in ChatGPT que no soy tan ingenioso todavía)
+
+📍 Entry → North → Kitchen
+A faint draft brushes past as you move forward. The air shifts slightly, carrying the scent of aged spices and something long forgotten.
+
+📍 Kitchen → East → Dining Room
+The quiet air seems to grow heavier as you continue. There’s an odd stillness here, as if the space is waiting for something.
+
+📍 Dining Room → East → Library (🔒 Requires a key)
+A tall, imposing doorway stands ahead, its frame blending seamlessly into the dim surroundings. Something about it feels... resistant, as if it does not wish to be disturbed.
+
+(Una vez desbloqueada)
+With a subtle shift, the resistance fades. Beyond, silence and shadow stretch into the unknown.
+
+📍 Library → South → Cellar (🔍 Hidden passage)
+Something is off. The walls feel too even, too deliberate. A closer look reveals a faint outline—almost imperceptible. A hidden way downwards.
+
+(Después de abrirlo)
+A passageway yawns open beneath you, swallowing the dim light as you descend into the cold below.
+
+📍 Cellar → West → Studio
+The air thickens as you move, the damp scent clinging to every breath. Silence presses in, absorbing each step.
+
+📍 Cellar → South → Gallery
+A quiet stillness hangs in the air. Something unseen lingers at the edges of your vision, disappearing the moment you try to focus.
+
+📍 Cellar → East → Garden (🔒 Enemy drops key)
+A heavy obstruction halts your path. It resists, unmoving. Something prowls nearby, its presence brushing against the silence.
+
+(Una vez conseguida la llave y desbloqueado)
+A subtle shift, and the way forward creaks open. The scent of damp earth drifts in, colder than expected.
+
+📍 Garden → East → Final
+The space ahead feels... different. The air is lighter, the silence less oppressive. Something unseen pulls you forward, as if the journey is reaching its end.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Dificultades
+
+Como hace tiempo que no diseño un código estructurado por clases, me ha costado un poco saber por dónde y cómo empezar.
