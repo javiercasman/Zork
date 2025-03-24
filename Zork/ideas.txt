@@ -41,37 +41,37 @@ Al final de cada "turno", haces Update y asignas (según qué entidades) las ent
 DESCRIPCIONES DE EXITS (made in ChatGPT que no soy tan ingenioso todavía)
 
 📍 Entry → North → Kitchen
-A faint draft brushes past as you move forward. The air shifts slightly, carrying the scent of aged spices and something long forgotten.
+The room feels still, but you notice a faint draft coming from the north. The scent of aged spices and something long forgotten beckons you to the doorway ahead.
 
 📍 Kitchen → East → Dining Room
-The quiet air seems to grow heavier as you continue. There’s an odd stillness here, as if the space is waiting for something.
+To the east, a darkened passageway stretches forward. The heavy air grows denser as you move, and the stillness is palpable, inviting you to step into the unknown.
 
 📍 Dining Room → East → Library (🔒 Requires a key)
-A tall, imposing doorway stands ahead, its frame blending seamlessly into the dim surroundings. Something about it feels... resistant, as if it does not wish to be disturbed.
+To the east, a tall and imposing doorway stands. Its frame blends almost seamlessly with the shadows. There's a strange resistance here, as if the passage doesn’t want to be disturbed.
 
 (Una vez desbloqueada)
-With a subtle shift, the resistance fades. Beyond, silence and shadow stretch into the unknown.
+The door creaks open slightly as the resistance fades. A dark, quiet room waits beyond, its silence almost deafening.
 
 📍 Library → South → Cellar (🔍 Hidden passage)
-Something is off. The walls feel too even, too deliberate. A closer look reveals a faint outline—almost imperceptible. A hidden way downwards.
+To the south, you notice something odd—almost as if the wall is too perfect. With a closer inspection, you find a faint outline in the stone, a hidden passage leading downward.
 
 (Después de abrirlo)
-A passageway yawns open beneath you, swallowing the dim light as you descend into the cold below.
+The concealed passageway opens with a low groan. The cold darkness below beckons you to descend.
 
 📍 Cellar → West → Studio
-The air thickens as you move, the damp scent clinging to every breath. Silence presses in, absorbing each step.
+To the west, a narrow corridor leads into an even deeper silence. The dampness in the air grows heavier, and the oppressive quiet swallows your every step.
 
 📍 Cellar → South → Gallery
-A quiet stillness hangs in the air. Something unseen lingers at the edges of your vision, disappearing the moment you try to focus.
+In the southern corner, the darkness seems to thicken. There is something here, something you can feel but not quite see, drawing you into the shadows beyond.
 
 📍 Cellar → East → Garden (🔒 Enemy drops key)
-A heavy obstruction halts your path. It resists, unmoving. Something prowls nearby, its presence brushing against the silence.
+To the east, a heavy obstruction halts your path. It resists, unmoving. Something prowls nearby, its presence brushing against the silence.
 
 (Una vez conseguida la llave y desbloqueado)
-A subtle shift, and the way forward creaks open. The scent of damp earth drifts in, colder than expected.
+With the key in hand, the barrier gives way, creaking as it opens. A fresh, earthy scent emerges from beyond, cool and inviting.
 
 📍 Garden → East → Final
-The space ahead feels... different. The air is lighter, the silence less oppressive. Something unseen pulls you forward, as if the journey is reaching its end.
+To the east, the air feels lighter, less oppressive. The path ahead beckons with an almost otherworldly pull, drawing you toward the final destination of your journey.
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

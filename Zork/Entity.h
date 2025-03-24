@@ -10,15 +10,15 @@ enum EntityType { NPC, PLAYER, EXIT, ROOM, ITEM };
 
 class Entity {
 public:
-
-	virtual ~Entity() {}
+	Entity(const string name, const string description, Entity* parent);
+	virtual ~Entity() {};
 
 	EntityType type;
 	string name;
 	string description;
+	Entity* parent; //Cada entidad tiene un padre, que representa a qué vector de entidades pertenece (ver ideas.txt).
 	list<Entity*> contains;
 
-	Entity* parent; //Cada entidad tiene un padre, que representa a qué vector de entidades pertenece (ver ideas.txt).
 	virtual void Update();
 };
 

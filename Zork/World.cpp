@@ -5,7 +5,6 @@
 #include "Exit.h"
 #include "Room.h"
 
-
 using namespace std;
 
 World::World()
@@ -45,4 +44,6 @@ World::World()
 	Exit* garden_west = new Exit("Garden West", "", garden, WEST, garden, cellar);
 	Exit* garden_east = new Exit("Garden East", "To the east, the air feels lighter, less oppressive. The path ahead beckons with an almost otherworldly pull, drawing you toward the final destination of your journey.",
 								 garden, EAST, garden, end);
+
+
 }

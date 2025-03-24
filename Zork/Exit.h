@@ -8,7 +8,7 @@ enum ExitDirection { NORTH, SOUTH, EAST, WEST };
 class Exit : public Entity {
 public:
 
-	Exit(const string* name, const string* description, Entity* parent, const ExitDirection direction, const Room* source, const Room* destination);
+	Exit(const string* name, const string* description, const Entity* parent, const ExitDirection direction, const Room* source, const Room* destination); //creo q parent no será necesario declararlo, podemos hacer en la constructora parent = source.
 	~Exit();
 
 	ExitDirection direction;
