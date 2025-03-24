@@ -6,7 +6,7 @@
 
 using namespace std;
 
-enum EntityType { CREATURE, EXIT, ROOM, ITEM };
+enum EntityType { NPC, PLAYER, EXIT, ROOM, ITEM };
 
 class Entity {
 public:
@@ -15,6 +15,7 @@ public:
 	string description;
 	list<Entity*> contains;
 
+	Entity* parent; //Cada entidad tiene un padre, que representa a qué vector de entidades pertenece (ver ideas.txt).
 	virtual void Update();
 };
 

@@ -5,6 +5,8 @@ using namespace std;
 
 class World {
 public:
+	World();
+	~World();
 	vector<Entity*> entities; // Entidades del juego
 };
 

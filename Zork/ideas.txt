@@ -1,0 +1,32 @@
+1. hacer un bool en "Item" que determine si puede contener Items dentro o no (p.e. una espada no puede, un saco sí)
+2. implementar algo en "Exit" que represente si necesita una llave o no
+
+
+"contains" de Player == inventario. Es decir, solo puede contener Item (?)
+
+DUDA: update pura o no?
+
+
+Sobre el contains:
+
+- cuando inicializo el mundo, cada entidad tiene su contain. depende del tipo de entidad, contain es una cosa u otra.
+p.e. el contains de player es el inventario, el de room es las exits, items y creatures que hay. al final se acaba creando
+una jerarquía de entidades, como un arbol.
+
+
+
+							Room
+							  |
+							  |
+							  |
+			-------------------------------------------------------------------------
+			|									|
+			|									|
+		   Saco marrón								     Player
+			|									|
+			|								   ------------
+		     Espada								   |	      |
+											Lámpara     Llave
+
+
+Ahora imagínate que abro el saco y saco la espada. Espada sería una entidad más en Room, al mismo nivel que Saco marrón y Player. Es decir, quitaríamos la espada del vector de entidades de saco marrón y la meteríamos en Room. O imagínate que dropeo la lámpara, pues igual, la quitariamos del vector de entidades de player y la meteríamos en el de Room. Tendríamos que hacer un método (no sé si en World o Entity) que actualice el contain al que pertenece cada objeto cuando interactuamos con él. Para esto habría que indicar el Parent de cada entidad, para saber donde ir. Por ejemplo, dropeo la lámpara, decimos "Cuál es el parent de Lámpara?" Player. Vale, "cuál es el parent de Player?" Room. Vale, pues si dropeo la lámpara, pasará a formar parte del Parent de su Parent, es decir, de Room. Otra cosa a tener en cuenta es que cada instancia por ejemplo de Exit JAMÁS pasará a formar parte de otro vector de entidades, siempre se quedará en el de Room, ya que no podemos modificar la exit, es una puerta sabes? Claro, pues esa es la función Update, acabo de caer no? Podemos convertirla en pura.

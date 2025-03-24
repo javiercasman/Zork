@@ -4,7 +4,7 @@
 using namespace std;
 
 class Room : public Entity {
-
+	Room()
 };
 
 #endif // _ROOM_INCLUDE
