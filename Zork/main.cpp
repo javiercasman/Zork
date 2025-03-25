@@ -36,15 +36,19 @@ int main() {
 			cout << "Are you sure you want to quit?\n";
 			getline(cin, input);
 			tokens = tokenizeInput(input);
-			while (tokens[0] != "yes" && tokens[0] != "no") {
+			while (tokens[0] != "yes" && tokens[0] != "y" && tokens[0] != "no" && tokens[0] != "n") {
 				cout << "Please answer yes or no.\n";
 				getline(cin, input);
 				tokens = tokenizeInput(input);
 			}
-			if (tokens[0] == "yes") break;
-			if (tokens[0] == "no") continue;
+			if (tokens[0] == "yes" || tokens[0] == "y") break;
+			if (tokens[0] == "no" || tokens[0] == "n") continue;
 		}
 
+		if (tokens.size() == 0) {
+			cout << "I beg your pardon?\n";
+			continue;
+		}
 		if (!world.Parser(tokens)) cout << "That's not a verb I recognise.\n";
 
 		//ahora le pasa el input al world, este se encarga de parsearlo para poder gestionar las entidades7

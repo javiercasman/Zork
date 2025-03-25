@@ -125,5 +125,61 @@ World::~World()
 
 bool World::Parser(const vector<string>& tokens)
 {
+	// Hay comandos de una palabra, dos, tres y cuatro
+	bool ret = true;
+	if(tokens.size() == 1) {
+		if (tokens[0] == "north" || tokens[0] == "n") {
+			//go north
+		}
+		else if (tokens[0] == "south" || tokens[0] == "s") {
+			//go south
+		}
+		else if (tokens[0] == "east" || tokens[0] == "e") {
+			//go east
+		}
+		else if (tokens[0] == "west" || tokens[0] == "w") {
+			//go west
+		}
+		else if (tokens[0] == "look" || tokens[0] == "l") {
+			//look
+		}
+		else if (tokens[0] == "inventory" || tokens[0] == "i") {
+			//inventory
+		}
+		/*else if (tokens[0] == "save") {
+			//save
+		}
+		else if (tokens[0] == "restore"){
+			//restore save
+		}
+		no nos da tiempo creo yo*/
+		else if (tokens[0] == "restart") {
+			//restart
+		}
+		/*else if (tokens[0] == "help") {
+			//help. no se si meterlo
+		}*/
+		else ret = false;
+	}
+	else if (tokens.size() == 2) {
+		if (tokens[0] == "go") {
+			if (tokens[1] == "north" || tokens[1] == "n") {
+				//go north
+			}
+			else if (tokens[1] == "south" || tokens[1] == "s") {
+				//go south
+			}
+			else if (tokens[1] == "east" || tokens[1] == "e") {
+				//go east
+			}
+			else if (tokens[1] == "west" || tokens[1] == "w") {
+				//go west
+			}
+			else ret = false;
+		}
+		else if (tokens[0] == "get" || tokens[0] == "take") {
 
+		}
+	}
+	return ret;
 }
