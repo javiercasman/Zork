@@ -3,11 +3,10 @@
 
 using namespace std;
 
-Entity::Entity(const string name, const string description, Entity* parent) : name(name), description(description), parent(parent)
+Entity::Entity(const string name, const string description, Entity* parent, EntityType type) : name(name), description(description), parent(parent), type(type)
 {
-	type = NULL;
 }
 
-Entity::~Entity()
+void Entity::Update()
 {
 }

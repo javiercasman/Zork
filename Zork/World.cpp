@@ -84,7 +84,7 @@ World::World()
 
 	//Initialize items
 	Item* mailbox = new Item("mailbox", "There is a weathered mailbox, its paint chipped and faded. It looks like it hasn’t been used in quite some time, but something about it seems important.",
-							 entry, false, false, false, true, false, true, 0);
+							 entry, false, false, false, true, false, true, false, 0);
 	Item* letter = new Item("letter", "A single letter, sealed with an old wax emblem. The paper is brittle with age.",
 							mailbox, true, true, false, false, false, true, false, 1);
 	Item* lamp = new Item("lamp", "A tarnished brass lamp, its once-bright glow now dimmed by years of dust. It still holds some warmth when touched, though it's clear it hasn't been used in a long time.",
@@ -121,4 +121,9 @@ World::World()
 
 World::~World()
 {
+}
+
+bool World::Parser(const vector<string>& tokens)
+{
+
 }

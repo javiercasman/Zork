@@ -10,7 +10,7 @@ enum EntityType { NPC, PLAYER, EXIT, ROOM, ITEM };
 
 class Entity {
 public:
-	Entity(const string name, const string description, Entity* parent);
+	Entity(const string name, const string description, Entity* parent, EntityType type);
 	virtual ~Entity() {};
 
 	EntityType type;

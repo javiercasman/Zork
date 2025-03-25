@@ -1,6 +1,8 @@
 #ifndef _ITEM_INCLUDE
 #define _ITEM_INCLUDE
 
+#include "Entity.h"
+
 using namespace std;
 
 class Item : public Entity {
@@ -23,8 +25,8 @@ public:
 	bool can_move; //si se puede mover
 	bool is_moved; //ha sido movido o no
 
-	bool can_break; //si se puede romper o no
-	bool is_broken; //si esta roto o no
+	bool can_break; //si se puede romper o no	//creo q voy a quitar esto
+	bool is_broken; //si esta roto o no			// y esto tambien
 
 	bool can_use; //esto solo para el amuleto
 

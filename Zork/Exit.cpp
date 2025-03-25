@@ -1,9 +1,10 @@
 #include <iostream>
 #include "Exit.h"
+#include "Room.h"
 
 using namespace std;
 
-Exit::Exit(const string name, const string description, const Entity* parent, /*const ExitDirection direction, */const Room* destination) : Entity(name, description, parent), destination(destination)
+Exit::Exit(const string name, const string description, Entity* parent, /*const ExitDirection direction, */Room* destination) : Entity(name, description, parent, EXIT), destination(destination)
 {
 }
 
