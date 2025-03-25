@@ -3,9 +3,11 @@
 
 using namespace std;
 
-class NPC : public Creature {
-	NPC(const string name, const string description, Entity* parent, const int damage_points);
-	~NPC();
+class Npc : public Creature {
+public:
+	Npc(const string name, const string description, Entity* parent, int health_points, const int damage_points);
+	~Npc();
+
 	int damage_points;
 };
 

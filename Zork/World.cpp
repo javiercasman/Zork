@@ -5,6 +5,8 @@
 #include "Exit.h"
 #include "Room.h"
 #include "Item.h"
+#include "Npc.h"
+#include "Player.h"
 
 using namespace std;
 
@@ -20,6 +22,16 @@ World::World()
 	Room* gallery = new Room("Gallery", "A strange hush fills the space, as if the very walls are holding their breath. The dim light creates shifting patterns, distorting the edges of the room.");
 	Room* garden = new Room("Garden", "The scent of earth and damp greenery lingers in the air. The wind carries faint rustling sounds, their source unseen, as if the space is alive in its own quiet way.");
 	Room* end = new Room("End", "Congratulations! You made it to the end.\n Thanks for playing :)\n");
+
+	entities.push_back(entry);
+	entities.push_back(kitchen);
+	entities.push_back(dining_room);
+	entities.push_back(library);
+	entities.push_back(cellar);
+	entities.push_back(studio);
+	entities.push_back(gallery);
+	entities.push_back(garden);
+	entities.push_back(end);
 
 	//Initialize exits (cada puerta es una Exit)
 	Exit* entry_north = new Exit("north", "The room feels still, but you notice a faint draft coming from the north. The scent of aged spices and something long forgotten beckons you to the doorway ahead.", 
@@ -46,15 +58,34 @@ World::World()
 	Exit* garden_east = new Exit("east", "To the east, a faint light glimmers through the shadows, and the air feels charged with anticipation. Before you, a weathered door stands sealed with a heavy chain, its surface marked by time. The path beyond beckons, as if waiting for something—or someone—to set it in motion.",
 								 garden, /*EAST, */end);
 
-	//Initialize creatures
-	NPC* troll = new NPC("troll", "A hulking figure stands before you, its grotesque face twisted into a sneer. With thick, ragged skin covered in patches of moss, the troll towers over you, exuding a menacing presence. Its eyes gleam with malice, and a low growl rumbles from deep within its throat.",
-						 cellar, 25);//el parent ira cambiando, mecanica de q el bicho se vaya moviendo
+	entities.push_back(entry_north);
+	entities.push_back(kitchen_south);
+	entities.push_back(kitchen_east);
+	entities.push_back(dining_room_west);
+	entities.push_back(dining_room_east);
+	entities.push_back(library_west);
+	entities.push_back(library_south);
+	entities.push_back(cellar_north);
+	entities.push_back(cellar_west);
+	entities.push_back(cellar_south);
+	entities.push_back(cellar_east);
+	entities.push_back(studio_east);
+	entities.push_back(gallery_north);
+	entities.push_back(garden_west);
+	entities.push_back(garden_east);
 
+	//Initialize creatures
+	Npc* troll = new Npc("troll", "A hulking figure stands before you, its grotesque face twisted into a sneer. With thick, ragged skin covered in patches of moss, the troll towers over you, exuding a menacing presence. Its eyes gleam with malice, and a low growl rumbles from deep within its throat.",
+						 cellar, 100, 25);//el parent ira cambiando, mecanica de q el bicho se vaya moviendo
+	Player* player = new Player("player", "", entry, 100);
+
+	entities.push_back(troll);
+	entities.push_back(player);
 
 	//Initialize items
 	Item* mailbox = new Item("mailbox", "There is a weathered mailbox, its paint chipped and faded. It looks like it hasn’t been used in quite some time, but something about it seems important.",
 							 entry, false, false, false, true, false, true, 0);
-	Item* letter = new Item("letter", "A single letter, sealed with an old wax emblem. The paper is brittle with age, and the ink is faded, but you can still make out the faint words: \"The key to the truth is closer than you think.\"",
+	Item* letter = new Item("letter", "A single letter, sealed with an old wax emblem. The paper is brittle with age.",
 							mailbox, true, true, false, false, false, true, false, 1);
 	Item* lamp = new Item("lamp", "A tarnished brass lamp, its once-bright glow now dimmed by years of dust. It still holds some warmth when touched, though it's clear it hasn't been used in a long time.",
 						  kitchen, true, false, true, false, false, true, false, 3);
@@ -72,4 +103,22 @@ World::World()
 							showcase, true, false, false, false, false, false, true, 1);
 	Item* key_troll = new Item("key", "The key hangs from a small leather strap, tucked away in a hidden pocket of the troll's attire. Its shape is simple yet distinctive, the metal catching a faint glint of light as it shifts with every movement.",
 							   troll, false, false, false, false, false, false, false, 1); //de momento, no se podra coger, mas tarde si, cuando el troll la dropee
+	Item* sword = new Item("sword", "There is a rusty sword lying on the ground, its blade dulled with age and neglect. Despite its worn appearance, the sword could still be useful in the right hands.",
+						   entry, true, false, false, false, false, false, false, 25);
+
+	entities.push_back(mailbox);
+	entities.push_back(letter);
+	entities.push_back(lamp);
+	entities.push_back(note);
+	entities.push_back(painting);
+	entities.push_back(key_library);
+	entities.push_back(bookshelf);
+	entities.push_back(showcase);
+	entities.push_back(amulet);
+	entities.push_back(key_troll);
+	entities.push_back(sword);
+}
+
+World::~World()
+{
 }

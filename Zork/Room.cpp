@@ -1,6 +1,6 @@
 #include <iostream>
-#include "room.h"
-#include "entity.h"
+#include "Room.h"
+#include "Entity.h"
 
 using namespace std;
 
