@@ -1,6 +1,11 @@
 1. hacer un bool en "Item" que determine si puede contener Items dentro o no (p.e. una espada no puede, un saco sí)
 2. implementar algo en "Exit" que represente si necesita una llave o no
 3. que el arma brille cuando el enemigo esté en una habitación connexa a la que estás. que brille mucho cuando esté en la misma.
+4. habrá q implementar algo en exit q indique si se puede pasar o no (la puerta está cerrada, no está la lámpara encendida...)
+5. si estás en library/cellar/studio/gallery, la oscuridad te come (hay un bicho en el zork q te mata si estás a oscuras creo)
+6. look repite todas las descripciones
+7. Aun le tengo que encontrar un sentido al Name del Exit, yo quitaría direction la verdad. Al fin y al cabo, el Name de una Entity sirve para los comandos.
+8. algo en item que determine si se puede agarrar, romper, mover...
 
 
 "contains" de Player == inventario. Es decir, solo puede contener Item (?)
@@ -32,6 +37,8 @@ una jerarquía de entidades, como un arbol.
 
 Ahora imagínate que abro el saco y saco la espada. Espada sería una entidad más en Room, al mismo nivel que Saco marrón y Player. Es decir, quitaríamos la espada del vector de entidades de saco marrón y la meteríamos en Room. O imagínate que dropeo la lámpara, pues igual, la quitariamos del vector de entidades de player y la meteríamos en el de Room. Tendríamos que hacer un método (no sé si en World o Entity) que actualice el contain al que pertenece cada objeto cuando interactuamos con él. Para esto habría que indicar el Parent de cada entidad (el padre en el árbol), para saber donde ir. Por ejemplo, dropeo la lámpara, decimos "Cuál es el parent de Lámpara?" Player. Vale, "cuál es el parent de Player?" Room. Vale, pues si dropeo la lámpara, pasará a formar parte del Parent de su Parent, es decir, de Room. Otra cosa a tener en cuenta es que cada instancia por ejemplo de Exit JAMÁS pasará a formar parte de otro vector de entidades, siempre se quedará en el de Room, ya que no podemos modificar la exit, es una puerta sabes? Claro, pues esa es la función Update, acabo de caer no? Podemos convertirla en pura.
 
+Hacemos un cambio: quitamos location de creature, y source de exit, ya que por definicion es lo mismo que Parent.
+
 O por ejemplo, si queremos hacer un NPC que cambie de Room segun el turno, se tendrá que cambiar el parent a otra Room.
 
 Al final de cada "turno", haces Update y asignas (según qué entidades) las entidades a la lista contain de sus parents.
@@ -53,10 +60,10 @@ To the east, a tall and imposing doorway stands. Its frame blends almost seamles
 The door creaks open slightly as the resistance fades. A dark, quiet room waits beyond, its silence almost deafening.
 
 📍 Library → South → Cellar (🔍 Hidden passage)
-To the south, you notice something odd—almost as if the wall is too perfect. With a closer inspection, you find a faint outline in the stone, a hidden passage leading downward.
+"To the south, a massive bookshelf stands against the wall, filled with dusty tomes. Something about it feels... off. The books are perfectly arranged, almost too perfectly. Upon closer inspection, you notice faint scratch marks on the floor, as if the bookshelf has been moved before."
 
 (Después de abrirlo)
-The concealed passageway opens with a low groan. The cold darkness below beckons you to descend.
+"With a firm push, the bookshelf resists at first, then suddenly shifts with a deep grinding noise. Dust swirls in the air as it slowly swings open, revealing a dark passage leading downward. A damp, musty scent drifts up from below, hinting at the hidden depths of the cellar."
 
 📍 Cellar → West → Studio
 To the west, a narrow corridor leads into an even deeper silence. The dampness in the air grows heavier, and the oppressive quiet swallows your every step.
@@ -65,16 +72,37 @@ To the west, a narrow corridor leads into an even deeper silence. The dampness i
 In the southern corner, the darkness seems to thicken. There is something here, something you can feel but not quite see, drawing you into the shadows beyond.
 
 📍 Cellar → East → Garden (🔒 Enemy drops key)
-To the east, a heavy obstruction halts your path. It resists, unmoving. Something prowls nearby, its presence brushing against the silence.
+"To the east, a narrow staircase leads upward, vanishing into the darkness above. At the top, a heavy wooden door blocks the way, its surface scarred by time and neglect. You try the handle—it doesn’t budge. A sturdy lock keeps it sealed, its key nowhere in sight. As you step back, a chill runs down your spine—something lurks nearby, watching, waiting."
 
 (Una vez conseguida la llave y desbloqueado)
 With the key in hand, the barrier gives way, creaking as it opens. A fresh, earthy scent emerges from beyond, cool and inviting.
 
 📍 Garden → East → Final
-To the east, the air feels lighter, less oppressive. The path ahead beckons with an almost otherworldly pull, drawing you toward the final destination of your journey.
+"To the east, a faint light glimmers through the shadows, and the air feels charged with anticipation. Before you, a weathered door stands sealed with a heavy chain, its surface marked by time. The path beyond beckons, as if waiting for something—or someone—to set it in motion."
+
+usar amuleto para abrir la puerta:
+"You hold the amulet up to the chain that secures the door. To your surprise, the amulet begins to glow faintly, and the chain rattles as if stirred by an unseen force. The lock clicks open with an eerie sound, and the door slowly creaks open, revealing the path beyond."
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Dificultades
 
 Como hace tiempo que no diseño un código estructurado por clases, me ha costado un poco saber por dónde y cómo empezar.
+
+He priorizado la estructura a la eficiencia, y he evitado hacer en Room un vector/lista de Exits, pues a la hora de describir la habitación ya tenemos el contains. La lista de exits era util para buscar rapidamente si hay una exit o no en alguna dirección que el jugador indique
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+IDEAS DE GAMEPLAY
+
+Que el monstruo se pasee por Cellar - Gallery - Studio, pero entonces es todo como muy vacío.
+
+la descripcion de los items, como la hacemos? rollo, si la lampara esta en la cocina tiene sentido q diga "hay una lampara en un mueble" noseq, pero si la dropeamos? que dira? --> vale, hay como una pequeña descripcion rollo "there's a lamp here".
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+TIPOS DE OBJETOS SEGUN COMANDOS
+
+Get/take/grab, throw, drop, read (first take), put x in container (no tengo que tener container en el inventario), turn on/off, attack X with item (en el inventario), break X with item (en el inventario, X no)
+open
+move (no se puede coger)

@@ -4,7 +4,7 @@
 using namespace std;
 
 class Player : public Creature {
-	Player(const string* name, const string* description, Entity* parent, Room* location);
+	Player(const string* name, const string* description, Entity* parent);
 	~Player();
 };
 

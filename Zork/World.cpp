@@ -18,32 +18,33 @@ World::World()
 	Room* studio = new Room("Studio", "A faint sense of focus and solitude lingers in the air, as if the room still remembers moments of intense concentration. Dust hangs in the stillness, undisturbed.");
 	Room* gallery = new Room("Gallery", "A strange hush fills the space, as if the very walls are holding their breath. The dim light creates shifting patterns, distorting the edges of the room.");
 	Room* garden = new Room("Garden", "The scent of earth and damp greenery lingers in the air. The wind carries faint rustling sounds, their source unseen, as if the space is alive in its own quiet way.");
-	Room* end = new Room("End", "Congratulations! You made it to the end.\n Thanks for playing :)\n")
+	Room* end = new Room("End", "Congratulations! You made it to the end.\n Thanks for playing :)\n");
 
 	//Create exits (cada puerta es una Exit)
-	Exit* entry_north = new Exit("Entry North", "The room feels still, but you notice a faint draft coming from the north. The scent of aged spices and something long forgotten beckons you to the doorway ahead.", 
-								 entry, NORTH, entry, kitchen);
-	Exit* kitchen_south = new Exit("Kitchen South", "", kitchen, SOUTH, kitchen, entry);
-	Exit* kitchen_east = new Exit("Kitchen East", "To the east, a darkened passageway stretches forward. The heavy air grows denser as you move, and the stillness is palpable, inviting you to step into the unknown.",
-								  kitchen, EAST, kitchen, dining_room);
-	Exit* dining_room_west = new Exit("Dining Room West", "", dining_room, WEST, dining_room, kitchen);
-	Exit* dining_room_east = new Exit("Dining Room East", "To the east, a tall and imposing doorway stands. Its frame blends almost seamlessly with the shadows. There's a strange resistance here, as if the passage doesn’t want to be disturbed.",
-									  dining_room, WEST, dining_room, library);//lo de 'una vez desbloqueada'?
-	Exit* library_west = new Exit("Library West", "", library, WEST, library, dining_room);
-	Exit* library_south = new Exit("Library South", "To the south, you notice something odd—almost as if the wall is too perfect. With a closer inspection, you find a faint outline in the stone, a hidden passage leading downward.",
-								   library, SOUTH, library, cellar);
-	Exit* cellar_north = new Exit("Cellar North", "", cellar, NORTH, cellar, library);
-	Exit* cellar_west = new Exit("Cellar West", "To the west, a narrow corridor leads into an even deeper silence. The dampness in the air grows heavier, and the oppressive quiet swallows your every step.",
-								 cellar, WEST, cellar, studio);
-	Exit* cellar_south = new Exit("Cellar South", "In the southern corner, the darkness seems to thicken. There is something here, something you can feel but not quite see, drawing you into the shadows beyond.",
-								  cellar, SOUTH, cellar, gallery);
-	Exit* cellar_east = new Exit("Cellar East", "To the east, a heavy obstruction halts your path. It resists, unmoving. Something prowls nearby, its presence brushing against the silence.",
-								 cellar, EAST, cellar, garden);
-	Exit* studio_east = new Exit("Studio East", "", studio, EAST, studio, cellar);
-	Exit* gallery_north = new Exit("Gallery North", "", gallery, NORTH, gallery, cellar);
-	Exit* garden_west = new Exit("Garden West", "", garden, WEST, garden, cellar);
-	Exit* garden_east = new Exit("Garden East", "To the east, the air feels lighter, less oppressive. The path ahead beckons with an almost otherworldly pull, drawing you toward the final destination of your journey.",
-								 garden, EAST, garden, end);
+	Exit* entry_north = new Exit("north", "The room feels still, but you notice a faint draft coming from the north. The scent of aged spices and something long forgotten beckons you to the doorway ahead.", 
+								 entry, /*NORTH, */kitchen);
+	Exit* kitchen_south = new Exit("south", "", kitchen, /*SOUTH, */entry);
+	Exit* kitchen_east = new Exit("east", "To the east, a darkened passageway stretches forward. The heavy air grows denser as you move, and the stillness is palpable, inviting you to step into the unknown.",
+								  kitchen, /*EAST, */dining_room);
+	Exit* dining_room_west = new Exit("west", "", dining_room, /*WEST, */kitchen);
+	Exit* dining_room_east = new Exit("east", "To the east, a tall and imposing doorway stands. Its frame blends almost seamlessly with the shadows. There's a strange resistance here, as if the passage doesn’t want to be disturbed.",
+									  dining_room, /*WEST, */library);//lo de 'una vez desbloqueada'?
+	Exit* library_west = new Exit("west", "", library, /*WEST, */dining_room);
+	Exit* library_south = new Exit("south", "To the south, a massive bookshelf stands against the wall, filled with dusty tomes. Something about it feels... off. The books are perfectly arranged, almost too perfectly. Upon closer inspection, you notice faint scratch marks on the floor, as if the bookshelf has been moved before.",
+								   library, /*SOUTH, */cellar);
+	Exit* cellar_north = new Exit("north", "", cellar, /*NORTH, */library);
+	Exit* cellar_west = new Exit("west", "To the west, a narrow corridor leads into an even deeper silence. The dampness in the air grows heavier, and the oppressive quiet swallows your every step.",
+								 cellar, /*WEST, */studio);
+	Exit* cellar_south = new Exit("south", "In the southern corner, the darkness seems to thicken. There is something here, something you can feel but not quite see, drawing you into the shadows beyond.",
+								  cellar, /*SOUTH, */gallery);
+	Exit* cellar_east = new Exit("east", "To the east, a narrow staircase leads upward, vanishing into the darkness above. At the top, a heavy wooden door blocks the way, its surface scarred by time and neglect. You try the handle—it doesn’t budge. A sturdy lock keeps it sealed, its key nowhere in sight. As you step back, a chill runs down your spine—something lurks nearby, watching, waiting.",
+								 cellar, /*EAST, */garden);
+	Exit* studio_east = new Exit("east", "", studio, /*EAST, */cellar);
+	Exit* gallery_north = new Exit("north", "", gallery, /*NORTH, */cellar);
+	Exit* garden_west = new Exit("west", "", garden, /*WEST, */cellar);
+	Exit* garden_east = new Exit("east", "To the east, a faint light glimmers through the shadows, and the air feels charged with anticipation. Before you, a weathered door stands sealed with a heavy chain, its surface marked by time. The path beyond beckons, as if waiting for something—or someone—to set it in motion.",
+								 garden, /*EAST, */end);
 
-
+	//Create items
+	Item* mailbox = new Item("mailbox", "There is a weathered mailbox, its paint chipped and faded. It looks like it hasn’t been used in quite some time, but something about it seems important.");
 }
