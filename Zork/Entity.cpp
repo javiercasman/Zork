@@ -3,7 +3,7 @@
 
 using namespace std;
 
-Entity::Entity(const string name, const string description, Entity* parent)
+Entity::Entity(const string name, const string description, Entity* parent) : name(name), description(description), parent(parent)
 {
 	type = NULL;
 }

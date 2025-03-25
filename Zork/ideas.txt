@@ -60,7 +60,7 @@ To the east, a tall and imposing doorway stands. Its frame blends almost seamles
 The door creaks open slightly as the resistance fades. A dark, quiet room waits beyond, its silence almost deafening.
 
 📍 Library → South → Cellar (🔍 Hidden passage)
-"To the south, a massive bookshelf stands against the wall, filled with dusty tomes. Something about it feels... off. The books are perfectly arranged, almost too perfectly. Upon closer inspection, you notice faint scratch marks on the floor, as if the bookshelf has been moved before."
+"To the south, a massive bookshelf stands against the wall, filled with dusty tomes."
 
 (Después de abrirlo)
 "With a firm push, the bookshelf resists at first, then suddenly shifts with a deep grinding noise. Dust swirls in the air as it slowly swings open, revealing a dark passage leading downward. A damp, musty scent drifts up from below, hinting at the hidden depths of the cellar."
@@ -83,6 +83,12 @@ With the key in hand, the barrier gives way, creaking as it opens. A fresh, eart
 usar amuleto para abrir la puerta:
 "You hold the amulet up to the chain that secures the door. To your surprise, the amulet begins to glow faintly, and the chain rattles as if stirred by an unseen force. The lock clicks open with an eerie sound, and the door slowly creaks open, revealing the path beyond."
 
+
+
+
+llave cuando la suelta el troll: 
+"The monster dropped a large iron key with intricate engravings, worn by time and use. It has a heavy, almost ominous feel to it, as if it holds the power to unlock something important. It clinks softly as it drops to the ground after the troll falls."
+
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Dificultades
@@ -99,10 +105,12 @@ Que el monstruo se pasee por Cellar - Gallery - Studio, pero entonces es todo co
 
 la descripcion de los items, como la hacemos? rollo, si la lampara esta en la cocina tiene sentido q diga "hay una lampara en un mueble" noseq, pero si la dropeamos? que dira? --> vale, hay como una pequeña descripcion rollo "there's a lamp here".
 
+podemos cambiar Name a un vector de Names, por si hay sinonimos (Bookshelf, shelve...)
+
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 TIPOS DE OBJETOS SEGUN COMANDOS
 
-Get/take/grab, throw, drop, read (first take), put x in container (no tengo que tener container en el inventario), turn on/off, attack X with item (en el inventario), break X with item (en el inventario, X no)
+Get/take/grab, throw, drop, read (first take), put x in container (no tengo que tener container en el inventario), turn on/off, attack X with item (en el inventario), break X with item (en el inventario, X no), smell
 open
 move (no se puede coger)

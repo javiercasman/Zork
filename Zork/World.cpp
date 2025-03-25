@@ -4,12 +4,13 @@
 #include "Creature.h"
 #include "Exit.h"
 #include "Room.h"
+#include "Item.h"
 
 using namespace std;
 
 World::World()
 {
-	//Create rooms
+	//Initialize rooms
 	Room* entry = new Room("Entry", "The room is dimly lit, with shadows stretching along the walls. The air feels heavy, carrying the scent of time and dust. The floor creaks softly beneath your steps.");
 	Room* kitchen = new Room("Kitchen", "A faint aroma of old spices lingers in the air. The walls are stained from years of use, and the cold atmosphere makes the room feel long abandoned.");
 	Room* dining_room = new Room("Dining room", "The space feels eerily silent, as if waiting for an unseen presence to return. The air is stale, carrying whispers of past gatherings now long forgotten.");
@@ -20,7 +21,7 @@ World::World()
 	Room* garden = new Room("Garden", "The scent of earth and damp greenery lingers in the air. The wind carries faint rustling sounds, their source unseen, as if the space is alive in its own quiet way.");
 	Room* end = new Room("End", "Congratulations! You made it to the end.\n Thanks for playing :)\n");
 
-	//Create exits (cada puerta es una Exit)
+	//Initialize exits (cada puerta es una Exit)
 	Exit* entry_north = new Exit("north", "The room feels still, but you notice a faint draft coming from the north. The scent of aged spices and something long forgotten beckons you to the doorway ahead.", 
 								 entry, /*NORTH, */kitchen);
 	Exit* kitchen_south = new Exit("south", "", kitchen, /*SOUTH, */entry);
@@ -45,6 +46,30 @@ World::World()
 	Exit* garden_east = new Exit("east", "To the east, a faint light glimmers through the shadows, and the air feels charged with anticipation. Before you, a weathered door stands sealed with a heavy chain, its surface marked by time. The path beyond beckons, as if waiting for something—or someone—to set it in motion.",
 								 garden, /*EAST, */end);
 
-	//Create items
-	Item* mailbox = new Item("mailbox", "There is a weathered mailbox, its paint chipped and faded. It looks like it hasn’t been used in quite some time, but something about it seems important.");
+	//Initialize creatures
+	NPC* troll = new NPC("troll", "A hulking figure stands before you, its grotesque face twisted into a sneer. With thick, ragged skin covered in patches of moss, the troll towers over you, exuding a menacing presence. Its eyes gleam with malice, and a low growl rumbles from deep within its throat.",
+						 cellar, 25);//el parent ira cambiando, mecanica de q el bicho se vaya moviendo
+
+
+	//Initialize items
+	Item* mailbox = new Item("mailbox", "There is a weathered mailbox, its paint chipped and faded. It looks like it hasn’t been used in quite some time, but something about it seems important.",
+							 entry, false, false, false, true, false, true, 0);
+	Item* letter = new Item("letter", "A single letter, sealed with an old wax emblem. The paper is brittle with age, and the ink is faded, but you can still make out the faint words: \"The key to the truth is closer than you think.\"",
+							mailbox, true, true, false, false, false, true, false, 1);
+	Item* lamp = new Item("lamp", "A tarnished brass lamp, its once-bright glow now dimmed by years of dust. It still holds some warmth when touched, though it's clear it hasn't been used in a long time.",
+						  kitchen, true, false, true, false, false, true, false, 3);
+	Item* note = new Item("note", "There is a small, crumpled note left on the dining table. The handwriting is hurried, almost frantic: \"The guardian of this gate prefers art to words. He searches behind his haunting gaze.\"",
+						  dining_room, true, true, false, false, false, true, false, 1);
+	Item* painting = new Item("painting", "There is a painting on the wall, depicting the face of a person. The features are oddly lifelike, almost as if the eyes are following you. It feels as though the figure in the painting is watching your every move.",
+							  dining_room, false, false, false, false, true, true, false, 0);
+	Item* key_library = new Item("key", "There is a small, rusted key, nearly blending with the wall behind the painting. Its purpose is unclear, but it’s evident it has been hidden for a reason.",
+								 NULL, true, false, false, false, false, false, false, 1); //NULL porque ya cambiara a dining_room cuando se rompa o se mueva el cuadro, esta oculto
+	Item* bookshelf = new Item("bookshelf", "Something about it feels... off. The books are perfectly arranged, almost too perfectly. Upon closer inspection, you notice faint scratch marks on the floor, as if the bookshelf has been moved before.",
+							   library, false, false, false, false, true, false, false, 0);
+	Item* showcase = new Item("showcase", "There is a dusty showcase that holds a variety of strange and unusual objects, each one more peculiar than the last. One item in particular catches your eye—a small, ornate amulet, resting under a dim light, almost glowing with an ethereal energy.",
+							  gallery, false, false, false, true, false, true, false, 0);
+	Item* amulet = new Item("amulet", "There is a small, intricately carved amulet made of silver. It seems to shimmer faintly in the light, and there is an inscription on its surface in an ancient language. Something about it feels strangely familiar, as though it holds a purpose beyond simple decoration.",
+							showcase, true, false, false, false, false, false, true, 1);
+	Item* key_troll = new Item("key", "The key hangs from a small leather strap, tucked away in a hidden pocket of the troll's attire. Its shape is simple yet distinctive, the metal catching a faint glint of light as it shifts with every movement.",
+							   troll, false, false, false, false, false, false, false, 1); //de momento, no se podra coger, mas tarde si, cuando el troll la dropee
 }
