@@ -3,6 +3,7 @@
 
 #include "Entity.h"
 #include "Room.h"
+#include "Item.h"
 
 using namespace std;
 
@@ -11,11 +12,16 @@ enum ExitDirection { NORTH, SOUTH, EAST, WEST }; //esto sirve de algo?
 class Exit : public Entity {
 public:
 
-	Exit(const string name, const string description, Entity* parent, /*const ExitDirection direction, */Room* destination); //creo q parent no será necesario declararlo, podemos hacer en la constructora parent = source.
+	Exit(const string name, const string description, Entity* parent, /*const ExitDirection direction, */Room* destination, bool is_locked, Item* key, bool is_blocked, Item* block); //creo q parent no será necesario declararlo, podemos hacer en la constructora parent = source.
 	~Exit();
 
 	//ExitDirection direction;
 	Room* destination;
+	bool is_locked;
+	Item* key;
+
+	bool is_blocked;
+	Item* block;
 };
 
 #endif // _EXIT_INCLUDE

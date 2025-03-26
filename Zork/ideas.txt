@@ -95,8 +95,10 @@ Dificultades
 
 Como hace tiempo que no diseño un código estructurado por clases, me ha costado un poco saber por dónde y cómo empezar.
 
-He priorizado la estructura a la eficiencia, y he evitado hacer en Room un vector/lista de Exits, pues a la hora de describir la habitación ya tenemos el contains. La lista de exits era util para buscar rapidamente si hay una exit o no en alguna dirección que el jugador indique
+He priorizado la estructura a la eficiencia, y he evitado hacer en Room un vector/lista de Exits, pues a la hora de describir la habitación ya tenemos el contains. La lista de exits era util para buscar rapidamente si hay una exit o no en alguna dirección que el jugador indique.
 
+He tenido dudas sobre cómo se deben implementar las acciones una vez Parseadas (el Go, Look...), al final he llegado a la conclusión que lo más lógico es que, como todas esas acciones las hace Player, implementar ahí las diferentes funciones, y luego la función Update() se encarga de actualizar los contains de
+las entidades involucradas.
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 IDEAS DE GAMEPLAY

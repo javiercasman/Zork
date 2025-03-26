@@ -3,6 +3,7 @@
 
 #include <string>
 #include <list>
+#include <unordered_map>
 
 using namespace std;
 
@@ -16,8 +17,9 @@ public:
 	EntityType type;
 	string name;
 	string description;
-	Entity* parent; //Cada entidad tiene un padre, que representa a qué vector de entidades pertenece (ver ideas.txt).
-	list<Entity*> contains;
+	Entity* parent; //Cada entidad tiene un padre, que representa a que vector de entidades pertenece (ver ideas.txt).
+	//list<Entity*> contains; mejor crear un map
+	unordered_map<EntityType, list<Entity*>> contains;
 
 	virtual void Update();
 };
