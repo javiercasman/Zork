@@ -10,3 +10,7 @@ Room::Room(const string name, const string description) : Entity(name, descripti
 Room::~Room()
 {
 }
+
+void Room::Update(Entity* new_parent)
+{
+}

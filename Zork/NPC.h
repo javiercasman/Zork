@@ -10,9 +10,9 @@ public:
 	Npc(const string name, const string description, Entity* parent, int health_points, const int damage_points);
 	~Npc();
 
-	void func() override;
-
 	int damage_points;
+
+	void Update(Entity* new_parent) override;
 };
 
 #endif //_NPC_INCLUDE

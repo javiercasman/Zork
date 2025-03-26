@@ -11,12 +11,12 @@ public:
 	Player(const string name, const string description, Entity* parent, int health_points);
 	~Player();
 
-	void func() override; //es posible que la funcion sea attack? sino lo dejamos asi y ya, es q tiene mas sentido q Creature sea abstracta a q no lo sea
+	void Update(Entity* new_parent) override; //es posible que la funcion sea attack? sino lo dejamos asi y ya, es q tiene mas sentido q Creature sea abstracta a q no lo sea
 
 	//funciones provisionales, no creo q en todas haga falta pasar los tokens
 	void Move(const string& direction);
-	void Look(const vector<string>& tokens);
-	void Inventory(const vector<string>& tokens);
+	void Look();
+	void Inventory();
 	void Restart(const vector<string>& tokens);
 	void Take(const vector<string>& tokens);
 	void Drop(const vector<string>& tokens);

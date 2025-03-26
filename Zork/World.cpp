@@ -36,10 +36,11 @@ World::World()
 	//Initialize creatures
 	Npc* troll = new Npc("troll", "A hulking figure stands before you, its grotesque face twisted into a sneer. With thick, ragged skin covered in patches of moss, the troll towers over you, exuding a menacing presence. Its eyes gleam with malice, and a low growl rumbles from deep within its throat.",
 		cellar, 100, 25);//el parent ira cambiando, mecanica de q el bicho se vaya moviendo
-	Player* player = new Player("player", "", entry, 100);
+	player = new Player("player", "", entry, 100);
 
 	entities.push_back(troll);
 	entities.push_back(player);
+
 
 	//Initialize items
 	Item* mailbox = new Item("mailbox", "There is a weathered mailbox, its paint chipped and faded. It looks like it hasn’t been used in quite some time, but something about it seems important.",
@@ -100,7 +101,7 @@ World::World()
 	Exit* gallery_north = new Exit("north", "", gallery, /*NORTH, */cellar, false, NULL, false, NULL);
 	Exit* garden_west = new Exit("west", "", garden, /*WEST, */cellar, false, NULL, false, NULL);
 	Exit* garden_east = new Exit("east", "To the east, a faint light glimmers through the shadows, and the air feels charged with anticipation. Before you, a weathered door stands sealed with a heavy chain, its surface marked by time. The path beyond beckons, as if waiting for something—or someone—to set it in motion.",
-								 garden, /*EAST, */end, true, NULL, false, NULL); //locked es solo para unlock, pero el amuleto se activara con 'use' (en vd es mas complicado pero le veo mas sentido), cuando hagamos use unlockearemos esta puerta
+								 garden, /*EAST, */end, true, NULL, false, NULL); //locked es solo para unlock, pero el amuleto se activara con 'use' (en vd es mas complicado pero le veo mas sentido), cuando hagamos use unlockearemos esta puerta. ponemos q esta bloqueada pero no el objeto pq eso es solo si fuera "unlock"
 
 	entities.push_back(entry_north);
 	entities.push_back(kitchen_south);
@@ -121,6 +122,7 @@ World::World()
 
 World::~World()
 {
+	entities.clear();
 }
 
 bool World::Parser(const vector<string>& tokens)
@@ -164,17 +166,11 @@ bool World::Parser(const vector<string>& tokens)
 	}
 	else if (tokens.size() == 2) {
 		if (tokens[0] == "go") {
-			if (tokens[1] == "north" || tokens[1] == "n") {
-				//go north
-			}
-			else if (tokens[1] == "south" || tokens[1] == "s") {
-				//go south
-			}
-			else if (tokens[1] == "east" || tokens[1] == "e") {
-				//go east
-			}
-			else if (tokens[1] == "west" || tokens[1] == "w") {
-				//go west
+			if ((tokens[1] == "north" || tokens[1] == "n") ||
+				(tokens[1] == "south" || tokens[1] == "s") ||
+				(tokens[1] == "east" || tokens[1] == "e") ||
+				(tokens[1] == "west" || tokens[1] == "w")) {
+				player->Move(tokens[1]);
 			}
 			else ret = false;
 		}

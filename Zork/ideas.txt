@@ -8,6 +8,9 @@
 8. algo en item que determine si se puede agarrar, romper, mover...
 
 
+
+IMPORTANTE: cambiar atributos a Private y hacer Getters y Setters. (al final)
+
 "contains" de Player == inventario. Es decir, solo puede contener Item (?)
 
 DUDA: update pura o no?
@@ -116,3 +119,56 @@ TIPOS DE OBJETOS SEGUN COMANDOS
 Get/take/grab, throw, drop, read (first take), put x in container (no tengo que tener container en el inventario), turn on/off, attack X with item (en el inventario), break X with item (en el inventario, X no), smell
 open
 move (no se puede coger)
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+📝 1 PALABRA
+north (n), south (s), east (e), west (w)
+
+up (u), down (d)
+
+look (l)
+
+enter, in, out
+
+inventory (i)
+
+save
+
+restore
+
+restart
+
+quit (q)
+
+help
+
+📝 2 PALABRAS
+go (direction)
+
+get (item), take (item)
+
+drop (item)
+
+open (container/exit)
+
+read (item)
+
+eat (item)
+
+move (object)
+
+examine (object)
+
+close (door)
+
+kill (creature)
+
+📝 3 PALABRAS
+get all, take all
+
+put (item) in (container)
+
+turn on (item), turn off (item)
+
+kill (creature) with (item)

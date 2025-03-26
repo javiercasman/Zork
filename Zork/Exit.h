@@ -22,6 +22,8 @@ public:
 
 	bool is_blocked;
 	Item* block;
+
+	void Update(Entity* new_parent) override;
 };
 
 #endif // _EXIT_INCLUDE

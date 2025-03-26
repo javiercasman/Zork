@@ -31,6 +31,8 @@ public:
 	bool can_use; //esto solo para el amuleto
 
 	int damage_points; //si no se puede coger, sera null, porque solo puedes atacar con objetos de tu inventario
+
+	void Update(Entity* new_parent) override;
 };
 
 #endif // _ITEM_INCLUDE

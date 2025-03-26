@@ -12,7 +12,6 @@ enum EntityType { NPC, PLAYER, EXIT, ROOM, ITEM };
 class Entity {
 public:
 	Entity(const string name, const string description, Entity* parent, EntityType type);
-	virtual ~Entity() {};
 
 	EntityType type;
 	string name;
@@ -21,7 +20,11 @@ public:
 	//list<Entity*> contains; mejor crear un map
 	unordered_map<EntityType, list<Entity*>> contains;
 
-	virtual void Update();
+	virtual ~Entity() {
+		contains.clear();
+	}
+
+	virtual void Update(Entity* new_parent) = 0;
 };
 
 #endif // _ENTITY_INCLUDE
