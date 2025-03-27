@@ -237,5 +237,12 @@ bool World::Parser(const vector<string>& tokens)
 		else player->Drop(tokens[1]);
 	}
 
+	else if (tokens[0] == "open") {
+		if (tokens.size() > 2) cout << "You can\'t see any such thing." << endl;
+		else player->Open(tokens[1]);
+	}
+
+	else ret = false;
+
 	return ret;
 }

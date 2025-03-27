@@ -15,12 +15,13 @@ public:
 
 	//funciones provisionales, no creo q en todas haga falta pasar los tokens
 	void Move(const string& direction);
-	void Look();
+	void Look() override;
 	void Inventory();
 	void Restart(const vector<string>& tokens);
 	void Take(const string& item_name); //Pre: los objetos solo son de una palabra
 	void Drop(const string& item_name);
-	void Open(const vector<string>& tokens);
+	void Open(const string& item_name);
+	void Unlock(const string& exit_name);
 	void Read(const vector<string>& tokens);
 	void Move(const vector<string>& tokens);
 	void Kill(const vector<string>& tokens);

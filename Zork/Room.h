@@ -11,6 +11,7 @@ public:
 	~Room();
 
 	void Update(Entity* new_parent) override;
+	void Look() override;
 };
 
 #endif // _ROOM_INCLUDE

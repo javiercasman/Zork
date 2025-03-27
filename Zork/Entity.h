@@ -25,6 +25,7 @@ public:
 	}
 
 	virtual void Update(Entity* new_parent) = 0;
+	virtual void Look();
 };
 
 #endif // _ENTITY_INCLUDE

@@ -54,7 +54,7 @@ void Player::Move(const string& direction) //Pre: le enviaremos una direccion (N
 void Player::Look() {
 	//se define todo lo que esta en la habitacion
 	Room* location = static_cast<Room*>(parent);
-	cout << location->name << endl;
+	/*cout << location->name << endl;
 	cout << location->description << endl;
 	for (auto& pair : parent->contains) {
 		if (pair.first != PLAYER) {
@@ -63,7 +63,8 @@ void Player::Look() {
 				if (entity->description != "") cout << entity->description << endl;
 			}
 		}
-	}
+	}*/
+	location->Look();
 }
 
 void Player::Inventory() 
@@ -145,8 +146,48 @@ void Player::Drop(const string& item_name)
 	}
 }
 
-void Player::Open(const vector<string>& tokens)
+void Player::Open(const string& item_name)
 {
+	//open para los item containers. para las puertas lockeadas, Unlock.
+	Item* item = NULL;
+	Room* location = static_cast<Room*>(parent);
+	list<Entity*>& room_items = location->contains[ITEM];
+
+	auto it = find_if(room_items.begin(), room_items.end(), [&](Entity* e) {return e->name == item_name; });
+	if (it != room_items.end()) {
+		item = static_cast<Item*>(*it);
+		if (item->can_contain) {
+			if (!item->is_open) {
+				item->is_open = true;
+				cout << "You open the " << item->name << "." << endl;
+			}
+			else cout << "That\'s already open." << endl;
+		}
+		else cout << "That\'s not something you can open." << endl;
+	}
+	else {
+		//comprobamos si esta en el inventario, sino no hay
+		list<Entity*>& inventory = contains[ITEM];
+		auto it = find_if(inventory.begin(), inventory.end(), [&](Entity* e) {return e->name == item_name; });
+		if (it != inventory.end()) {
+			//esto en vd nunca va a pasar, pq no hemos creado un objeto container que se pueda coger, pero no esta de mas programarlo pq tampoco es un disparate (p.e. un saco)
+			item = static_cast<Item*>(*it);
+			if (item->can_contain) {
+				if (!item->is_open) {
+					item->is_open = true;
+					cout << "You open the " << item->name << "." << endl;
+				}
+				else cout << "That\'s already open." << endl;
+			}
+			else cout << "That\'s not something you can open." << endl;
+		}
+		else cout << "You can\'t see any such thing." << endl;
+	}
+}
+
+void Player::Unlock(const string& exit_name) 
+{
+
 }
 
 void Player::Read(const vector<string>& tokens)

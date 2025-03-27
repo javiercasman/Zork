@@ -16,6 +16,8 @@ IMPORTANTE: cambiar atributos a Private y hacer Getters y Setters. (al final)
 DUDA: update pura o no?
 
 
+La funcion Look() tiene mas sentido definirla en cada entidad y llamarla por cada entidad que existe. Por que? Porque yo puedo meter un container en un container, y en vez de hacer un bucle feo simplemente llamo al Look() de cada entidad.
+
 Sobre el contains:
 
 - cuando inicializo el mundo, cada entidad tiene su contain. depende del tipo de entidad, contain es una cosa u otra.
@@ -102,6 +104,8 @@ He priorizado la estructura a la eficiencia, y he evitado hacer en Room un vecto
 
 He tenido dudas sobre cómo se deben implementar las acciones una vez Parseadas (el Go, Look...), al final he llegado a la conclusión que lo más lógico es que, como todas esas acciones las hace Player, implementar ahí las diferentes funciones, y luego la función Update() se encarga de actualizar los contains de
 las entidades involucradas.
+
+No le he dado uso al vector de entidades de World. Por falta de tiempo (he sido muy ambicioso con los comandos) no lo he quitado ni he sabido darle un uso. Es decir, durante el proceso me he dado cuenta de eso, pero no he tenido tiempo de arreglarlo.
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 IDEAS DE GAMEPLAY
