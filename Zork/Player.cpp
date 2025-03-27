@@ -15,7 +15,7 @@ Player::~Player()
 {
 }
 
-void Player::Move(const string& direction) //Pre: le enviaremos una direccion (North, South, East, West)
+void Player::Go(const string& direction) //Pre: le enviaremos una direccion (North, South, East, West)
 {
 	Room* location = static_cast<Room*>(parent); //Parent siempre sera Room para Player.
 
@@ -75,7 +75,14 @@ void Player::Inventory()
 		cout << "You are carrying:" << endl;
 		for (Entity* entity : inventory) {
 			//if (entity->description != "") cout << entity->description << endl;
-			cout << "A " << entity->name << endl;
+			cout << "A " << entity->name;
+			if (!entity->contains[ITEM].empty()) {
+				cout << " that contains:\n";
+				for (Entity* e : entity->contains[ITEM]) {
+					cout << "\tA " << e->name << endl;
+				}
+			}
+			cout << endl;
 		}
 	}
 }
@@ -114,7 +121,7 @@ void Player::Take(const string& item_name)
 	//	else cout << "You can\'t see any such thing." << endl;
 	//}
 	vector<Entity*> items_copy(items.begin(), items.end()); //sino crashea
-	if (items_copy.empty()) cout << "You can't see any such thing" << endl;
+	if (items_copy.empty()) cout << "You can't see any such thing." << endl;
 	else if (item_name == "all") {
 		for (Entity* itemEntity : items_copy) {
 			item = static_cast<Item*>(itemEntity);
@@ -239,12 +246,22 @@ void Player::Open(const string& item_name)
 		list<Entity*>& inventory = contains[ITEM];
 		auto it = find_if(inventory.begin(), inventory.end(), [&](Entity* e) {return e->name == item_name; });
 		if (it != inventory.end()) {
-			//esto en vd nunca va a pasar, pq no hemos creado un objeto container que se pueda coger, pero no esta de mas programarlo pq tampoco es un disparate (p.e. un saco)
 			item = static_cast<Item*>(*it);
 			if (item->can_contain) {
 				if (!item->is_open) {
 					item->is_open = true;
 					cout << "You open the " << item->name << "." << endl;
+					if (!item->contains[ITEM].empty()) {
+						list<Entity*>& contained_items = item->contains[ITEM];
+						vector<Entity*> items_copy(contained_items.begin(), contained_items.end()); //sino crashea
+						for (Entity* itemEntity : items_copy) {
+							item = static_cast<Item*>(itemEntity);
+							if (item->can_grab) {
+								item->Update(this);
+								cout << "There was a " << item->name <<" inside. You took it" << endl;
+							}
+						}
+					}
 				}
 				else cout << "That\'s already open." << endl;
 			}
@@ -285,23 +302,81 @@ void Player::Read(const string& item_name)
 		if (item->can_read) cout << item->read_text << endl;
 		else cout << "You can't read that." << endl;
 	}
-	else cout << "You don't have such item." << endl;
+	else cout << "You don't have any such item." << endl;
 }
 
-void Player::Move(const vector<string>& tokens)
+void Player::Move(const string& item_name)
 {
+	Room* location = static_cast<Room*>(parent); //al final si q tendra q ser una variable de clase eh
+	list<Entity*>& items = location->contains[ITEM];
+	Item* item = NULL;
+	auto it = find_if(items.begin(), items.end(), [&](Entity* e) {return e->name == item_name; });
+	if (it != items.end()) {
+		item = static_cast<Item*>(*it);
+		if (item->can_move) {
+			if (!item->is_moved) {
+				item->is_moved = true;
+				if (item_name == "bookshelf") {
+					Exit* aux = static_cast<Exit*>(location->contains[EXIT].back()); //no me ha dado tiempo a hacerlo mejor, he tenido que hacer esto de manera rapida para que funcione todo
+					aux->is_blocked = false;
+				}
+				cout << "The " << item->name << " has been moved." << endl;
+			}
+			else cout << "The " << item->name << " is already moved" << endl;
+		}
+		else cout << "You can't move this." << endl;
+	}
+	else cout << "You can't see any such thing." << endl;
+
 }
 
 void Player::Kill(const vector<string>& tokens)
 {
 }
 
-void Player::Turn_on(const vector<string>& tokens)
+void Player::Turn_on(const string& item_name)
 {
+	list<Entity*>& inventory = contains[ITEM];
+	auto it = find_if(inventory.begin(), inventory.end(), [&](Entity* e) {return e->name == item_name; });
+	if (it != inventory.end()) {
+		Item* item = static_cast<Item*>(*it);
+		if (item->can_turn_on) {
+			if (!item->is_on) {
+				item->is_on = true;
+				cout << "The " << item->name << " is now on";
+			}
+			else cout << "The " << item->name << " is already on";
+		}
+		else cout << "You can't turn on that." << endl;
+	}
+	else cout << "You don't have any such item." << endl;
 }
 
-void Player::Put_in(const vector<string>& tokens)
+void Player::Put_in(const string& item_name, const string& container_name)
 {
+	Room* location = static_cast<Room*>(parent); //al final si q tendra q ser una variable de clase eh
+	list<Entity*>& items = location->contains[ITEM];
+	Item* item_container = NULL;
+	auto it = find_if(items.begin(), items.end(), [&](Entity* e) {return e->name == item_name; });
+	if (it != items.end()) {
+		item_container = static_cast<Item*>(*it);
+		if (item_container->can_contain) {
+			if (item_container->is_open) {
+				Item* item = NULL;
+				list<Entity*>& inventory = contains[ITEM];
+				auto it = find_if(inventory.begin(), inventory.end(), [&](Entity* e) {return e->name == item_name; });
+				if (it != inventory.end()) {
+					item = static_cast<Item*>(*it);
+					item->Update(item_container);
+					cout << "Done." << endl;
+				}
+				else cout << "You don't have that item." << endl;
+			}
+			else cout << "It is not open." << endl;
+		}
+		else cout << "You can't put anything in there." << endl;
+	}
+	else cout << "There is no item to put it in there." << endl;
 }
 
 void Player::Update(Entity* new_parent) {

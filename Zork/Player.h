@@ -14,7 +14,7 @@ public:
 	void Update(Entity* new_parent) override; //es posible que la funcion sea attack? sino lo dejamos asi y ya, es q tiene mas sentido q Creature sea abstracta a q no lo sea
 
 	//funciones provisionales, no creo q en todas haga falta pasar los tokens
-	void Move(const string& direction);
+	void Go(const string& direction);
 	void Look() override;
 	void Inventory();
 	void Restart(const vector<string>& tokens);
@@ -23,10 +23,10 @@ public:
 	void Open(const string& item_name);
 	void Unlock(const string& exit_name);
 	void Read(const string& item_name);
-	void Move(const vector<string>& tokens);
+	void Move(const string& item_name);
 	void Kill(const vector<string>& tokens);
-	void Turn_on(const vector<string>& tokens);
-	void Put_in(const vector<string>& tokens);
+	void Turn_on(const string& item_name);
+	void Put_in(const string& item_name, const string& container_name);
 };
 
 #endif // _PLAYER_INCLUDE

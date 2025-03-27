@@ -8,7 +8,7 @@ using namespace std;
 class Item : public Entity {
 public:
 
-	Item(const string name, const string description, Entity* parent, const bool can_grab, const bool can_read, const string read_text, const bool can_turn_on, const bool can_contain, const bool can_move, const bool can_break, const bool can_use, const int damage_points);
+	Item(const string name, const string description, Entity* parent, const bool can_grab, const bool can_read, const string read_text, const bool can_turn_on, const bool can_contain, const bool can_move, const bool can_use, const int damage_points);
 	~Item();
 	//a lo mejor otro constructor para cuando el parent es const? es decir, los q no son agarrables
 	bool can_grab; //si se puede agarrar se puede tirar, dejar en un container...
@@ -26,8 +26,8 @@ public:
 	bool can_move; //si se puede mover
 	bool is_moved; //ha sido movido o no
 
-	bool can_break; //si se puede romper o no	//creo q voy a quitar esto
-	bool is_broken; //si esta roto o no			// y esto tambien
+	//bool can_break; //si se puede romper o no	//creo q voy a quitar esto
+	//bool is_broken; //si esta roto o no			// y esto tambien
 
 	bool can_use; //esto solo para el amuleto
 

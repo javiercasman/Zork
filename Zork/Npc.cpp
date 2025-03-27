@@ -26,7 +26,7 @@ void Npc::Look()
 	cout << description << endl;
 	if (!contains.empty()) {
 		Item* item = NULL;
-		cout << "The " << name << "carries:" << endl;
+		cout << "The " << name << " carries:" << endl;
 		for (auto& pair : contains) {
 			if (pair.first != PLAYER) {
 				list<Entity*>& entities = pair.second;

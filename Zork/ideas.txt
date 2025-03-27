@@ -114,6 +114,11 @@ la descripcion de los items, como la hacemos? rollo, si la lampara esta en la co
 
 podemos cambiar Name a un vector de Names, por si hay sinonimos (Bookshelf, shelve...)
 
+Me he dado cuenta muy tarde de que he planteado mal lo de los objetos bloqueando salidas. No me da tiempo a arreglarlo asi que lo voy a tener que hacer un poco desestructurado. Creo que he sido demasiado optimista en cuanto a añadir contenido en el juego, me han faltado unos 2/3 días para
+implementar correctamente todo lo que había pensado desde un principio.
+
+Por otra parte, soy consciente de que tendría que haber hecho los atributos privados, y funciones públicas Get() y Set(), pero por pura comodidad lo había dejado así y, claro, no me ha dado tiempo tampoco :)
+
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 TIPOS DE OBJETOS SEGUN COMANDOS

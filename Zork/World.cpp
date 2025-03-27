@@ -44,33 +44,33 @@ World::World()
 
 	//Initialize items
 	Item* mailbox = new Item("mailbox", "There is a weathered mailbox, its paint chipped and faded. It looks like it hasn\'t been used in quite some time, but something about it seems important.",
-		entry, false, false, "", false, true, false, true, false, 0);
+		entry, false, false, "", false, true, false, false, 0);
 	Item* letter = new Item("letter", "A single letter, sealed with an old wax emblem. The paper is brittle with age.",
-		mailbox, true, true, "Welcome, player! \nThis is my custom Zork clone, a test project in progress.\nExplore, interact, and expect some rough edges.\nHave fun!", false, false, false, true, false, 1);
+		mailbox, true, true, "Welcome, player! \nThis is my custom Zork clone, a test project in progress.\nExplore, interact, and expect some rough edges.\nHave fun!", false, false, false, false, 1);
 	Item* lamp = new Item("lamp", "A tarnished brass lamp, its once-bright glow now dimmed by years of dust. It still holds some warmth when touched, though it\'s clear it hasn\'t been used in a long time.",
-		kitchen, true, false, "", true, false, false, true, false, 3);
+		kitchen, true, false, "", true, false, false, false, 3);
 	Item* note = new Item("note", "There is a small, crumpled note left on the dining table. The handwriting is hurried, almost frantic.",
-		dining_room, true, true, "The guardian of this gate prefers art to words. He searches behind his haunting gaze.", false, false, false, true, false, 1);
-	Item* painting = new Item("painting", "There is a painting on the wall, depicting the face of a person. The features are oddly lifelike, almost as if the eyes are following you. It feels as though the figure in the painting is watching your every move.",
-		dining_room, false, false, "", false, false, true, true, false, 0);
-	Item* key_library = new Item("key", "There is a small, rusted key, nearly blending with the wall behind the painting. Its purpose is unclear, but it\'s evident it has been hidden for a reason.",
-		NULL, true, false, "", false, false, false, false, false, 1); //NULL porque ya cambiara a dining_room cuando se rompa o se mueva el cuadro, esta oculto
+		dining_room, true, true, "The book seems to have been read many times. Its pages hold more than just words.", false, false, false, false, 1);
+	Item* book = new Item("book", "A weathered leather-bound book rests on the table. Its cover is worn, the title faded by time. The pages inside appear yellowed, and while it seems like it’s been opened countless times, it still exudes an air of secrecy, as though it holds knowledge beyond the written word.",
+		dining_room, true, false, "", false, true, false, false, 0);
+	Item* key_library = new Item("key", "There is a small, rusted key, inside the book. Its purpose is unclear, but it\'s evident it has been hidden for a reason.",
+		book, true, false, "", false, false, false, false, 1); //NULL porque ya cambiara a dining_room cuando se rompa o se mueva el cuadro, esta oculto
 	Item* bookshelf = new Item("bookshelf", "Something about it feels... off. The books are perfectly arranged, almost too perfectly. Upon closer inspection, you notice faint scratch marks on the floor, as if the bookshelf has been moved before.",
-		library, false, false, "", false, false, true, false, false, 0);
+		library, false, false, "", false, false, true, false, 0);
 	Item* showcase = new Item("showcase", "There is a dusty showcase that holds a variety of strange and unusual objects, each one more peculiar than the last. One item in particular catches your eye—a small, ornate amulet, resting under a dim light, almost glowing with an ethereal energy.",
-		gallery, false, false, "", false, true, false, true, false, 0);
+		gallery, false, false, "", false, true, false, false, 0);
 	Item* amulet = new Item("amulet", "There is a small, intricately carved amulet made of silver. It seems to shimmer faintly in the light, and there is an inscription on its surface in an ancient language. Something about it feels strangely familiar, as though it holds a purpose beyond simple decoration.",
-		showcase, true, false, "", false, false, false, false, true, 1);
+		showcase, true, false, "", false, false, false, true, 1);
 	Item* key_troll = new Item("key", "The key hangs from a small leather strap, tucked away in a hidden pocket of the troll\'s attire. Its shape is simple yet distinctive, the metal catching a faint glint of light as it shifts with every movement.",
-		troll, false, false, "", false, false, false, false, false, 1); //de momento, no se podra coger, mas tarde si, cuando el troll la dropee
+		troll, true, false, "", false, false, false, false, 1); //de momento, no se podra coger, mas tarde si, cuando el troll la dropee
 	Item* sword = new Item("sword", "There is a rusty sword lying on the ground, its blade dulled with age and neglect. Despite its worn appearance, the sword could still be useful in the right hands.",
-		entry, true, false, "", false, false, false, false, false, 25);
+		entry, true, false, "", false, false, false, false, 25);
 
 	entities.push_back(mailbox);
 	entities.push_back(letter);
 	entities.push_back(lamp);
 	entities.push_back(note);
-	entities.push_back(painting);
+	entities.push_back(book);
 	entities.push_back(key_library);
 	entities.push_back(bookshelf);
 	entities.push_back(showcase);
@@ -184,7 +184,7 @@ bool World::Parser(const vector<string>& tokens)
 			else if (tokens[0] == "east" || tokens[0] == "e") cout << " east." << endl;
 			else if (tokens[0] == "west" || tokens[0] == "w") cout << " west." << endl;
 		}
-		else player->Move(tokens[0]);
+		else player->Go(tokens[0]);
 	}
 
 	else if (tokens[0] == "look" || tokens[0] == "l") {
@@ -223,7 +223,7 @@ bool World::Parser(const vector<string>& tokens)
 				else if (tokens[1] == "east" || tokens[1] == "e") cout << " east wall." << endl;
 				else if (tokens[1] == "west" || tokens[1] == "w") cout << " west wall." << endl;
 			}
-			else player->Move(tokens[1]);
+			else player->Go(tokens[1]);
 		}
 	}
 	else if (tokens[0] == "get" || tokens[0] == "take") {
@@ -258,6 +258,21 @@ bool World::Parser(const vector<string>& tokens)
 		else player->Read(tokens[1]);
 	}
 
+	else if (tokens[0] == "move") {
+		if (tokens.size() == 1) cout << "What do you want to move?" << endl;
+		else if (tokens.size() > 2) cout << "You can\'t see any such thing." << endl;
+		else player->Move(tokens[1]);
+	}
+
+	else if (tokens[0] == "put") {
+		if (tokens.size() == 1) cout << "What do you want to put in and where?" << endl;
+		else if (tokens[2] == "in") {
+			if (tokens.size() == 2 || tokens.size() == 3) cout << "Where do you want to put it?" << endl;
+			else if (tokens.size() > 4) cout << "You can\'t see any such thing." << endl;
+			else player->Put_in(tokens[1], tokens[3]);
+		}
+		else ret = false;
+	}
 
 	else ret = false;
 
