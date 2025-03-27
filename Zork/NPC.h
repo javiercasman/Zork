@@ -2,6 +2,9 @@
 #define _NPC_INCLUDE
 
 #include "Creature.h"
+#include "Player.h"
+#include <cstdlib>
+#include <ctime>
 
 using namespace std;
 
@@ -12,8 +15,16 @@ public:
 
 	int damage_points;
 
+	bool probability50() const { //50% de posibilidades de que el NPC se mueva (si puede)
+		srand(time(0));
+		if (rand() % 100 < 50) return true;
+		else return false;
+	}
+
 	void Update(Entity* new_parent) override;
 	void Look() override;
+
+	void Action(Player* player);
 };
 
 #endif //_NPC_INCLUDE

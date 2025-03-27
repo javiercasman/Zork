@@ -1,8 +1,10 @@
 #include <iostream>
+#include <random>
 #include <algorithm>
 #include "Player.h"
 #include "Room.h"
 #include "Exit.h"
+#include "Npc.h"
 
 using namespace std;
 
@@ -20,7 +22,6 @@ void Player::Go(const string& direction) //Pre: le enviaremos una direccion (Nor
 	Room* location = static_cast<Room*>(parent); //Parent siempre sera Room para Player.
 
 	list<Entity*>& exits = location->contains[EXIT];
-	//falta hacer en caso de q la puerta este lock
 	bool exit_exists = false;
 	Exit* exit = NULL;
 	for (Entity* exitEntity : exits) {
@@ -47,6 +48,7 @@ void Player::Go(const string& direction) //Pre: le enviaremos una direccion (Nor
 		else {
 			Room* new_room = exit->destination;
 			Update(new_room);
+			Look();
 		}
 	}
 }
@@ -97,29 +99,6 @@ void Player::Take(const string& item_name)
 	Room* location = static_cast<Room*>(parent); //al final si q tendra q ser una variable de clase eh
 	list<Entity*>& items = location->contains[ITEM];
 	Item* item = NULL;
-	//if (items.empty()) cout << "You can't see any such thing" << endl;
-	//else if (item_name == "all") {
-	//	for (Entity* itemEntity : items) {
-	//		item = static_cast<Item*>(itemEntity); // Haz el cast a Item
-	//		if (item->can_grab) {
-	//			item->Update(this);
-	//			cout << item->name << ": Taken." << endl;
-	//		}
-	//		else cout << item->name << ": You can\'t take this." << endl;
-	//	}
-	//}
-	//else {
-	//	auto it = find_if(items.begin(), items.end(), [&](Entity* e) {return e->name == item_name;});
-	//	if (it != items.end()) {
-	//		item = static_cast<Item*>(*it);
-	//		if (item->can_grab) {
-	//			item->Update(this);
-	//			cout << "Taken." << endl;
-	//		}
-	//		else cout << "You can\'t take this." << endl;
-	//	}
-	//	else cout << "You can\'t see any such thing." << endl;
-	//}
 	vector<Entity*> items_copy(items.begin(), items.end()); //sino crashea
 	if (items_copy.empty()) cout << "You can't see any such thing." << endl;
 	else if (item_name == "all") {
@@ -161,9 +140,11 @@ void Player::Take(const string& item_name)
 		}
 	}
 	else{
+		bool item_found = false;
 		for (Entity* itemEntity : items) {
 			item = static_cast<Item*>(itemEntity);
 			if (item->name == item_name) {
+				item_found = true;
 				if (item->can_grab) {
 					item->Update(this);
 					cout << "Taken." << endl;
@@ -177,6 +158,7 @@ void Player::Take(const string& item_name)
 				for (Entity* containing_itemEntity : containing_items) {
 					containing_item = static_cast<Item*>(containing_itemEntity);
 					if (containing_item->name == item_name) {
+						item_found = true;
 						if (containing_item->can_grab) {
 							containing_item->Update(this);
 							cout << "Taken." << endl;
@@ -187,6 +169,7 @@ void Player::Take(const string& item_name)
 				}
 			}
 		}
+		if(!item_found) cout << "You can't see any such thing." << endl;
 	}
 }
 
@@ -330,8 +313,31 @@ void Player::Move(const string& item_name)
 
 }
 
-void Player::Kill(const vector<string>& tokens)
+void Player::Kill(const string& npc_name, const string& item_name)
 {
+	Room* location = static_cast<Room*>(parent); //al final si q tendra q ser una variable de clase eh
+	list<Entity*>& npcs = location->contains[NPC];
+	Npc* npc = NULL;
+	auto it = find_if(npcs.begin(), npcs.end(), [&](Entity* e) {return e->name == npc_name; });
+	if (it != npcs.end()) {
+		npc = static_cast<Npc*>(*it);
+		list<Entity*>& inventory = contains[ITEM];
+		Item* item = NULL;
+		auto it = find_if(inventory.begin(), inventory.end(), [&](Entity* e) {return e->name == item_name; });
+		if (it != inventory.end()) {
+			item = static_cast<Item*>(*it);
+			// Attack probability: 70/30
+			if (probability70()) {//acierta
+				cout << "You hitted the " << npc->name << " with your " << item->name << "!" << endl;
+				npc->health_points -= item->damage_points;
+			}
+			else {//falla
+				cout << "Oh, you missed the attack!" << endl;
+			}
+		}
+		else cout << "You don't have any such item." << endl;
+	}
+	else cout << "You can't see any such creature." << endl;
 }
 
 void Player::Turn_on(const string& item_name)
@@ -357,7 +363,7 @@ void Player::Put_in(const string& item_name, const string& container_name)
 	Room* location = static_cast<Room*>(parent); //al final si q tendra q ser una variable de clase eh
 	list<Entity*>& items = location->contains[ITEM];
 	Item* item_container = NULL;
-	auto it = find_if(items.begin(), items.end(), [&](Entity* e) {return e->name == item_name; });
+	auto it = find_if(items.begin(), items.end(), [&](Entity* e) {return e->name == container_name; });
 	if (it != items.end()) {
 		item_container = static_cast<Item*>(*it);
 		if (item_container->can_contain) {
@@ -376,7 +382,53 @@ void Player::Put_in(const string& item_name, const string& container_name)
 		}
 		else cout << "You can't put anything in there." << endl;
 	}
-	else cout << "There is no item to put it in there." << endl;
+	else{
+		list<Entity*>& items = contains[ITEM];
+		Item* item_container = NULL;
+		auto it = find_if(items.begin(), items.end(), [&](Entity* e) {return e->name == container_name; });
+		if (it != items.end()) {
+			item_container = static_cast<Item*>(*it);
+			if (item_container->can_contain) {
+				if (item_container->is_open) {
+					Item* item = NULL;
+					list<Entity*>& inventory = contains[ITEM];
+					auto it = find_if(inventory.begin(), inventory.end(), [&](Entity* e) {return e->name == item_name; });
+					if (it != inventory.end()) {
+						item = static_cast<Item*>(*it);
+						item->Update(item_container);
+						cout << "Done." << endl;
+					}
+					else cout << "You don't have that item." << endl;
+				}
+				else cout << "It is not open." << endl;
+			}
+			else cout << "You can't put anything in there." << endl;
+		}
+		else cout << "There is no item to put it in there." << endl;
+	}
+}
+
+void Player::Use(const string& item_name)
+{
+	list<Entity*>& inventory = contains[ITEM];
+	auto it = find_if(inventory.begin(), inventory.end(), [&](Entity* e) {return e->name == item_name; });
+	if (it != inventory.end()) {
+		Room* location = static_cast<Room*>(parent);
+		if (item_name != "amulet") {
+			cout << "You can't use this.\nMaybe try with something magical..." << endl;
+		}
+		else if (location->name != "Garden") {
+			cout << "You can't use this here. \nMaybe try somewhere with a strange obstacle..." << endl;
+		}
+		else {
+			Exit* exit_end = static_cast<Exit*>(location->contains[EXIT].back());
+			exit_end->is_locked = false; //ya no esta locked
+			cout << "You have unlocked the escape door!\n";
+		}
+	}
+	else {
+		cout << "You don't have any such item" << endl;
+	}
 }
 
 void Player::Update(Entity* new_parent) {

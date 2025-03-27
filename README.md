@@ -15,14 +15,15 @@ It follows the gameplay style from the original Zork!, with little few changes. 
 - `inventory: Check items you carry.`
 - `unlock <dirección>: Unlock a door at the corresponding direction (hint: you probably need a key).`
 - `quit: Exit the game.`
-- `restart: Restart the game.`
 - `drop: Drop an object.`
 - `put <object> in <object>: Put an object inside another one (if possible).`
 - `read <object>: Read an object like a note or a letter.`
 - `move <object>: Move an object which is acting as an obstacle.`
 - `kill <creature> with <item>: Attack a creature with an object in your possession.`
 
-## 4.Objective
+NOTE: You CAN'T take items that are inside another item that you already have in your inventory. For example, you CAN'T take the key inside the book if the book is already in your inventory. However, you can put it back in the book even if it is already in your inventory. I just had no time to do the rest :(
+
+## 4. Objective
 Your objective is to move through the rooms, unlocking doors, taking objects and even defeating enemies until you get to the end.
 
 Here is a map to guide yourself during the game:
@@ -31,14 +32,14 @@ Here is a map to guide yourself during the game:
 
 To end the game, you have to find the Amulet at the Gallery, then use it in the Garden. However, there is a hostile Troll guarding it, lurking around the Cellar and its surroundings! You must kill him to get the key that will you allow to escape from the house.
 
-## 5.Unique features
+## 5. Unique features
 I added some extra features that were not included on the main ones at the PDF, you could notice some of them on the commands list. These are:
 - Moveable and readable items
 - Combat
 - A creature that walks around (it has a little chance to move through the Gallery - Cellar - Studio rooms)
 - Exits that you can open with keys
 
-Also, I though on adding other ones, like the chance to save the game and restore it, or the requirement for some rooms to have a lamp on, otherwise you will be killed by a Grue (like in the original Zork!), but I had no time to do it, I wanted to be sure that the things that I added where well structured and implemented. However, I think it could be have done better, because after all I still think I have been too ambitious and underestimated the 'little' time I had to do all those things.
+Also, I though on adding other ones, like the chance to save the game and restore it, or restart it, also add the requirement for some rooms to have a lamp on, otherwise you will be killed by a Grue (like in the original Zork!), but I had no time to do it, I wanted to be sure that the things that I added where well structured and implemented. However, I think it could be have done better, because after all I still think I have been too ambitious and underestimated the 'little' time I had to do all those things.
 
 ## 6. Challenge and learning
 As I just described, I think I might have been too ambitious with this project. It has been quite a while since I did not put myself against a programming project that required a certain well-designed class structure like this one, so at the beginning I had some struggle to move on and decide where to start.

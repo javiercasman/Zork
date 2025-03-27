@@ -21,7 +21,7 @@ World::World()
 	Room* studio = new Room("Studio", "A faint sense of focus and solitude lingers in the air, as if the room still remembers moments of intense concentration. Dust hangs in the stillness, undisturbed.");
 	Room* gallery = new Room("Gallery", "A strange hush fills the space, as if the very walls are holding their breath. The dim light creates shifting patterns, distorting the edges of the room.");
 	Room* garden = new Room("Garden", "The scent of earth and damp greenery lingers in the air. The wind carries faint rustling sounds, their source unseen, as if the space is alive in its own quiet way.");
-	Room* end = new Room("End", "Congratulations! You made it to the end.\n Thanks for playing :)\n");
+	Room* end = new Room("End", "Congratulations! You made it to the end.\nThanks for playing :)\n");
 
 	entities.push_back(entry);
 	entities.push_back(kitchen);
@@ -127,52 +127,9 @@ World::~World()
 
 bool World::Parser(const vector<string>& tokens)
 {
-	// Hay comandos de una palabra, dos, tres y cuatro
 	// Todas las acciones las hace el Player. A partir de ahi, sus acciones repercuten en las otras Entitys.
-	// En verdad este metodo esta mal, lo q tendria q hacer es comprobar el primer token y luego verificar q no hay mas (en caso de, por ejemplo, inventory)
 	bool ret = true;
-	//if(tokens.size() == 1) {
-	//	if ((tokens[0] == "north" || tokens[0] == "n") ||
-	//		(tokens[0] == "south" || tokens[0] == "s") ||
-	//		(tokens[0] == "east" || tokens[0] == "e") ||
-	//		(tokens[0] == "west" || tokens[0] == "w")) {
-	//		player->Move(tokens[0]);
-	//	}
-	//	else if (tokens[0] == "look" || tokens[0] == "l") {
-	//		player->Look();
-	//	}
-	//	else if (tokens[0] == "inventory" || tokens[0] == "i") {
-	//		player->Inventory();
-	//	}
-	//	/*else if (tokens[0] == "save") {
-	//		//save
-	//	}
-	//	else if (tokens[0] == "restore"){
-	//		//restore save
-	//	}
-	//	no nos da tiempo creo yo*/
-	//	else if (tokens[0] == "restart") {
-	//		//restart
-	//	}
-	//	/*else if (tokens[0] == "help") {
-	//		//help. no se si meterlo
-	//	}*/
-	//	else ret = false;
-	//}
-	//else if (tokens.size() == 2) {
-	//	if (tokens[0] == "go") {
-	//		if ((tokens[1] == "north" || tokens[1] == "n") ||
-	//			(tokens[1] == "south" || tokens[1] == "s") ||
-	//			(tokens[1] == "east" || tokens[1] == "e") ||
-	//			(tokens[1] == "west" || tokens[1] == "w")) {
-	//			player->Move(tokens[1]);
-	//		}
-	//		else ret = false;
-	//	}
-	//	else if (tokens[0] == "get" || tokens[0] == "take") {
-	//		//tiene q ser o un objeto o all
-	//	}
-	//}
+
 	if ((tokens[0] == "north" || tokens[0] == "n") ||
 		(tokens[0] == "south" || tokens[0] == "s") ||
 		(tokens[0] == "east" || tokens[0] == "e") ||
@@ -274,7 +231,35 @@ bool World::Parser(const vector<string>& tokens)
 		else ret = false;
 	}
 
+	else if (tokens[0] == "kill") {
+		if (tokens.size() == 1) cout << "What do you want to kill and with what?" << endl;
+		else if (tokens[2] == "with") {
+			if (tokens.size() == 2 || tokens.size() == 3) cout << "What do you want to use as a weapon?" << endl;
+			else if (tokens.size() > 4) cout << "You can\'t see any such thing." << endl;
+			else player->Kill(tokens[1], tokens[3]);
+		}
+		else ret = false;
+	}
+
+	else if (tokens[0] == "use") {
+		if (tokens.size() == 1) cout << "What do you want to use?" << endl;
+		else if (tokens.size() > 2) cout << "You can\'t see any such thing." << endl;
+		else player->Use(tokens[1]);
+	}
+
 	else ret = false;
 
+	auto it = find_if(entities.begin(), entities.end(), [&](Entity* e) {return e->name == "troll"; });
+	Npc* npc = NULL;
+	if (it != entities.end()) {
+		npc = static_cast<Npc*>(*it);
+		npc->Action(player);
+	}
+
 	return ret;
+}
+
+bool World::player_alive()
+{
+	return player->health_points > 0;
 }

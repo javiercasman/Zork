@@ -16,6 +16,7 @@ public:
 	Player* player;
 
 	bool Parser(const vector<string>& tokens);
+	bool player_alive();
 };
 
 #endif // _WORLD_INCLUDE

@@ -24,9 +24,10 @@ public:
 	void Unlock(const string& exit_name);
 	void Read(const string& item_name);
 	void Move(const string& item_name);
-	void Kill(const vector<string>& tokens);
+	void Kill(const string& npc_name, const string& item_name);
 	void Turn_on(const string& item_name);
 	void Put_in(const string& item_name, const string& container_name);
+	void Use(const string& item_name); //solo para el Amuleto en el Garden
 };
 
 #endif // _PLAYER_INCLUDE
