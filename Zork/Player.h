@@ -22,7 +22,7 @@ public:
 	void Drop(const string& item_name);
 	void Open(const string& item_name);
 	void Unlock(const string& exit_name);
-	void Read(const vector<string>& tokens);
+	void Read(const string& item_name);
 	void Move(const vector<string>& tokens);
 	void Kill(const vector<string>& tokens);
 	void Turn_on(const vector<string>& tokens);

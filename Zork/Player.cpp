@@ -159,9 +159,9 @@ void Player::Take(const string& item_name)
 			if (item->name == item_name) {
 				if (item->can_grab) {
 					item->Update(this);
-					cout << item->name << ": Taken." << endl;
+					cout << "Taken." << endl;
 				}
-				else cout << item->name << ": You can\'t take that." << endl;
+				else cout << "You can\'t take that." << endl;
 				break;
 			}
 			else if (item->can_contain && item->is_open && !item->contains.empty()) {
@@ -172,9 +172,9 @@ void Player::Take(const string& item_name)
 					if (containing_item->name == item_name) {
 						if (containing_item->can_grab) {
 							containing_item->Update(this);
-							cout << containing_item->name << ": Taken." << endl;
+							cout << "Taken." << endl;
 						}
-						else cout << containing_item->name << ": You can\'t take that." << endl;
+						else cout << "You can\'t take that." << endl;
 						break;
 					}
 				}
@@ -187,11 +187,12 @@ void Player::Drop(const string& item_name)
 {
 	Item* item = NULL;
 	list<Entity*>& inventory = contains[ITEM];
+	vector<Entity*> inventory_copy(inventory.begin(), inventory.end()); //sino crashea
 	Room* location = static_cast<Room*>(parent); //al final si q tendra q ser una variable de clase eh
 	if (item_name == "all") {
-		if (inventory.empty()) cout << "You are empty handed." << endl;
+		if (inventory_copy.empty()) cout << "You are empty handed." << endl;
 		else {
-			for (Entity* entity : inventory) {
+			for (Entity* entity : inventory_copy) {
 				item = static_cast<Item*>(entity);
 				item->Update(location);
 				cout << item->name << ": Dropped." << endl;
@@ -199,8 +200,8 @@ void Player::Drop(const string& item_name)
 		}
 	}
 	else {
-		auto it = find_if(inventory.begin(), inventory.end(), [&](Entity* e) {return e->name == item_name;});
-		if (it != inventory.end()) {
+		auto it = find_if(inventory_copy.begin(), inventory_copy.end(), [&](Entity* e) {return e->name == item_name;});
+		if (it != inventory_copy.end()) {
 			item = static_cast<Item*>(*it);
 			item->Update(location);
 			cout << "Dropped." << endl;
@@ -255,11 +256,36 @@ void Player::Open(const string& item_name)
 
 void Player::Unlock(const string& exit_name) 
 {
-
+	Room* location = static_cast<Room*>(parent); //al final si q tendra q ser una variable de clase eh
+	list<Entity*>& exits = location->contains[EXIT];
+	auto it = find_if(exits.begin(), exits.end(), [&](Entity* e) {return e->name == exit_name; });
+	Exit* exit;
+	if (it != exits.end()) {
+		exit = static_cast<Exit*>(*it);
+		if (exit->is_locked) {
+			list<Entity*>& inventory = contains[ITEM];
+			auto it = find_if(inventory.begin(), inventory.end(), [&](Entity* e) {return e->name == exit->key->name; });
+			if (it != inventory.end()) {
+				exit->is_locked = false;
+				cout << "The door has opened." << endl;
+			}
+			else cout << "You don\'t have they required key to open it." << endl;
+		}
+		else cout << "This door is not locked by a key." << endl;
+	}
+	else cout << "There is a wall here.\n";
 }
 
-void Player::Read(const vector<string>& tokens)
+void Player::Read(const string& item_name)
 {
+	list<Entity*>& inventory = contains[ITEM];
+	auto it = find_if(inventory.begin(), inventory.end(), [&](Entity* e) {return e->name == item_name; });
+	if (it != inventory.end()) {
+		Item* item = static_cast<Item*>(*it);
+		if (item->can_read) cout << item->read_text << endl;
+		else cout << "You can't read that." << endl;
+	}
+	else cout << "You don't have such item." << endl;
 }
 
 void Player::Move(const vector<string>& tokens)

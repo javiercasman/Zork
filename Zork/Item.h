@@ -8,13 +8,14 @@ using namespace std;
 class Item : public Entity {
 public:
 
-	Item(const string name, const string description, Entity* parent, const bool can_grab, const bool can_read, const bool can_turn_on, const bool can_contain, const bool can_move, const bool can_break, const bool can_use, const int damage_points);
+	Item(const string name, const string description, Entity* parent, const bool can_grab, const bool can_read, const string read_text, const bool can_turn_on, const bool can_contain, const bool can_move, const bool can_break, const bool can_use, const int damage_points);
 	~Item();
 	//a lo mejor otro constructor para cuando el parent es const? es decir, los q no son agarrables
 	bool can_grab; //si se puede agarrar se puede tirar, dejar en un container...
 	//bool is_grabbed; //no es necesario, bastara con ver si esta en la habitacion o no
 
 	bool can_read;
+	string read_text;
 
 	bool can_turn_on; //si se puede encender, se puede apagar
 	bool is_on; //será siempre false si can_turn_on es false
