@@ -125,23 +125,11 @@ move (no se puede coger)
 📝 1 PALABRA
 north (n), south (s), east (e), west (w)
 
-up (u), down (d)
-
 look (l)
-
-enter, in, out
 
 inventory (i)
 
-save
-
-restore
-
 restart
-
-quit (q)
-
-help
 
 📝 2 PALABRAS
 go (direction)
@@ -154,15 +142,7 @@ open (container/exit)
 
 read (item)
 
-eat (item)
-
 move (object)
-
-examine (object)
-
-close (door)
-
-kill (creature)
 
 📝 3 PALABRAS
 get all, take all

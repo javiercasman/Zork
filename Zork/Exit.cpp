@@ -12,6 +12,6 @@ Exit::~Exit()
 {
 }
 
-void Exit::Update(Entity* new_parent) {
-
+void Exit::Update(Entity* new_parent) 
+{
 }

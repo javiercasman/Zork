@@ -7,7 +7,7 @@
 
 using namespace std;
 
-enum EntityType { NPC, PLAYER, EXIT, ROOM, ITEM };
+enum EntityType { ROOM, ITEM, EXIT, NPC, PLAYER };
 
 class Entity {
 public:

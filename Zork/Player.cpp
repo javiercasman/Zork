@@ -17,7 +17,6 @@ Player::~Player()
 void Player::Move(const string& direction) //Pre: le enviaremos una direccion (North, South, East, West)
 {
 	Room* location = static_cast<Room*>(parent); //Parent siempre sera Room para Player.
-	cout << location->name << endl;
 
 	list<Entity*>& exits = location->contains[EXIT];
 	//falta hacer en caso de q la puerta este lock
@@ -53,10 +52,30 @@ void Player::Move(const string& direction) //Pre: le enviaremos una direccion (N
 
 void Player::Look() {
 	//se define todo lo que esta en la habitacion
+	Room* location = static_cast<Room*>(parent);
+	cout << location->name << endl;
+	cout << location->description << endl;
+	for (auto& pair : parent->contains) {
+		if (pair.first != PLAYER) {
+			list<Entity*>& entities = pair.second;
+			for (Entity* entity : entities) {
+				if (entity->description != "") cout << entity->description << endl;
+			}
+		}
+	}
 }
 
-void Player::Inventory() {
-	//se describe todo lo del contains
+void Player::Inventory() 
+{
+	if (contains.empty()) cout << "You are empty handed." << endl;
+	else {
+		for (auto& pair : contains) {
+			list<Entity*>& entities = pair.second;
+			for (Entity* entity : entities) {
+				if (entity->description != "") cout << entity->description << endl;
+			}
+		}
+	}
 }
 
 void Player::Restart(const vector<string>& tokens)

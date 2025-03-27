@@ -27,7 +27,10 @@ int main() {
 	cout << "Welcome to Zork!" << endl;
 	while (true) {
 		//descripcion de las entidades de la habitacion (y de la propia habitacíon). Es decir, se hace automaticamente un 'look'
+		world.Parser(vector<string>{"l"}); //esto esta mal, es solo cuando entramos a una nueva habitacion
+
 		input = "";
+		cout << endl;
 		getline(cin, input); //leemos el input del jugador
 
 		tokens = tokenizeInput(input);
@@ -45,11 +48,12 @@ int main() {
 			if (tokens[0] == "no" || tokens[0] == "n") continue;
 		}
 
-		if (tokens.size() == 0) {
+		else if (tokens.size() == 0) {
 			cout << "I beg your pardon?\n";
 			continue;
 		}
-		if (!world.Parser(tokens)) cout << "That's not a verb I recognise.\n";
+		else if (!world.Parser(tokens)) cout << "That's not a verb I recognise.\n";
+		// posibilidad para meter quit y restart en Parser: eliminamos el primer if, y despues de este else if metemos un else, donde comprobemos si tokens[0] es quit o restart
 
 		//ahora le pasa el input al world, este se encarga de parsearlo para poder gestionar las entidades7
 	}

@@ -14,4 +14,8 @@ Npc::~Npc()
 
 void Npc::Update(Entity* new_parent)
 {
+	//hay q meter lo de si se mueve de habitacion o no
+	parent->contains[PLAYER].remove(this);
+	parent = new_parent;
+	parent->contains[PLAYER].push_back(this);
 }
