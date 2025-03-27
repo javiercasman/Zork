@@ -129,49 +129,113 @@ bool World::Parser(const vector<string>& tokens)
 {
 	// Hay comandos de una palabra, dos, tres y cuatro
 	// Todas las acciones las hace el Player. A partir de ahi, sus acciones repercuten en las otras Entitys.
-	//En verdad este metodo esta mal, lo q tendria q hacer es comprobar el primer token y luego verificar q no hay mas (en caso de, por ejemplo, inventory)
+	// En verdad este metodo esta mal, lo q tendria q hacer es comprobar el primer token y luego verificar q no hay mas (en caso de, por ejemplo, inventory)
 	bool ret = true;
-	if(tokens.size() == 1) {
-		if ((tokens[0] == "north" || tokens[0] == "n") ||
-			(tokens[0] == "south" || tokens[0] == "s") ||
-			(tokens[0] == "east" || tokens[0] == "e") ||
-			(tokens[0] == "west" || tokens[0] == "w")) {
-			player->Move(tokens[0]);
+	//if(tokens.size() == 1) {
+	//	if ((tokens[0] == "north" || tokens[0] == "n") ||
+	//		(tokens[0] == "south" || tokens[0] == "s") ||
+	//		(tokens[0] == "east" || tokens[0] == "e") ||
+	//		(tokens[0] == "west" || tokens[0] == "w")) {
+	//		player->Move(tokens[0]);
+	//	}
+	//	else if (tokens[0] == "look" || tokens[0] == "l") {
+	//		player->Look();
+	//	}
+	//	else if (tokens[0] == "inventory" || tokens[0] == "i") {
+	//		player->Inventory();
+	//	}
+	//	/*else if (tokens[0] == "save") {
+	//		//save
+	//	}
+	//	else if (tokens[0] == "restore"){
+	//		//restore save
+	//	}
+	//	no nos da tiempo creo yo*/
+	//	else if (tokens[0] == "restart") {
+	//		//restart
+	//	}
+	//	/*else if (tokens[0] == "help") {
+	//		//help. no se si meterlo
+	//	}*/
+	//	else ret = false;
+	//}
+	//else if (tokens.size() == 2) {
+	//	if (tokens[0] == "go") {
+	//		if ((tokens[1] == "north" || tokens[1] == "n") ||
+	//			(tokens[1] == "south" || tokens[1] == "s") ||
+	//			(tokens[1] == "east" || tokens[1] == "e") ||
+	//			(tokens[1] == "west" || tokens[1] == "w")) {
+	//			player->Move(tokens[1]);
+	//		}
+	//		else ret = false;
+	//	}
+	//	else if (tokens[0] == "get" || tokens[0] == "take") {
+	//		//tiene q ser o un objeto o all
+	//	}
+	//}
+	if ((tokens[0] == "north" || tokens[0] == "n") ||
+		(tokens[0] == "south" || tokens[0] == "s") ||
+		(tokens[0] == "east" || tokens[0] == "e") ||
+		(tokens[0] == "west" || tokens[0] == "w")) {
+		if (tokens.size() > 1) {
+			cout << "I only understood you as far as wanting to";
+			if (tokens[0] == "north" || tokens[0] == "n") cout << " north." << endl;
+			else if (tokens[0] == "south" || tokens[0] == "s") cout << " south." << endl;
+			else if (tokens[0] == "east" || tokens[0] == "e") cout << " east." << endl;
+			else if (tokens[0] == "west" || tokens[0] == "w") cout << " west." << endl;
 		}
-		else if (tokens[0] == "look" || tokens[0] == "l") {
-			player->Look();
-		}
-		else if (tokens[0] == "inventory" || tokens[0] == "i") {
-			player->Inventory();
-		}
-		/*else if (tokens[0] == "save") {
-			//save
-		}
-		else if (tokens[0] == "restore"){
-			//restore save
-		}
-		no nos da tiempo creo yo*/
-		else if (tokens[0] == "restart") {
-			//restart
-		}
-		/*else if (tokens[0] == "help") {
-			//help. no se si meterlo
-		}*/
-		else ret = false;
+		else player->Move(tokens[0]);
 	}
-	else if (tokens.size() == 2) {
-		if (tokens[0] == "go") {
-			if ((tokens[1] == "north" || tokens[1] == "n") ||
-				(tokens[1] == "south" || tokens[1] == "s") ||
-				(tokens[1] == "east" || tokens[1] == "e") ||
-				(tokens[1] == "west" || tokens[1] == "w")) {
-				player->Move(tokens[1]);
-			}
-			else ret = false;
-		}
-		else if (tokens[0] == "get" || tokens[0] == "take") {
 
+	else if (tokens[0] == "look" || tokens[0] == "l") {
+		if (tokens.size() > 1) {
+			cout << "I only understood you as far as wanting to look.";
+		}
+		else player->Look();
+	}
+
+	else if (tokens[0] == "inventory" || tokens[0] == "i") {
+		if (tokens.size() > 1) {
+			cout << "I only understood you as far as wanting to inventory.";
+		}
+		else player->Inventory();
+	}
+	else if (tokens[0] == "restart") {
+		if (tokens.size() > 1) {
+			cout << "I only understood you as far as wanting to restart.";
 		}
 	}
+	else if (tokens[0] == "quit") {
+		if (tokens.size() > 1) {
+			cout << "I only understood you as far as wanting to quit.";
+		}
+	}
+	else if (tokens[0] == "go") {
+		if ((tokens[1] == "north" || tokens[1] == "n") ||
+			(tokens[1] == "south" || tokens[1] == "s") ||
+			(tokens[1] == "east" || tokens[1] == "e") ||
+			(tokens[1] == "west" || tokens[1] == "w")) {
+			if (tokens.size() > 2) {
+				cout << "I only understood you as far as wanting to go to the";
+				if (tokens[1] == "north" || tokens[1] == "n") cout << " north wall." << endl;
+				else if (tokens[1] == "south" || tokens[1] == "s") cout << " south wall." << endl;
+				else if (tokens[1] == "east" || tokens[1] == "e") cout << " east wall." << endl;
+				else if (tokens[1] == "west" || tokens[1] == "w") cout << " west wall." << endl;
+			}
+			else player->Move(tokens[1]);
+		}
+	}
+	else if (tokens[0] == "get" || tokens[0] == "take") {
+		//tiene q ser o un objeto o all
+		if (tokens.size() > 2) cout << "You can\'t see any such thing." << endl;
+		else player->Take(tokens[1]);
+	}
+
+	else if (tokens[0] == "drop") {
+		//tiene q ser o un objeto o all
+		if (tokens.size() > 2) cout << "You can\'t see any such thing." << endl;
+		else player->Drop(tokens[1]);
+	}
+
 	return ret;
 }

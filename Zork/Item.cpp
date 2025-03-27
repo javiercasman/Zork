@@ -20,8 +20,8 @@ Item::~Item()
 
 void Item::Update(Entity* new_parent)
 {
-	parent->contains[PLAYER].remove(this);
+	parent->contains[ITEM].remove(this);
 	parent = new_parent;
-	parent->contains[PLAYER].push_back(this);
+	parent->contains[ITEM].push_back(this);
 }
 

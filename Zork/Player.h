@@ -18,8 +18,8 @@ public:
 	void Look();
 	void Inventory();
 	void Restart(const vector<string>& tokens);
-	void Take(const vector<string>& tokens);
-	void Drop(const vector<string>& tokens);
+	void Take(const string& item_name); //Pre: los objetos solo son de una palabra
+	void Drop(const string& item_name);
 	void Open(const vector<string>& tokens);
 	void Read(const vector<string>& tokens);
 	void Move(const vector<string>& tokens);
