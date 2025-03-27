@@ -25,3 +25,26 @@ void Item::Update(Entity* new_parent)
 	parent->contains[ITEM].push_back(this);
 }
 
+void Item::Look()
+{
+	cout << description << endl;
+	if (can_contain) {
+		if (is_open && !contains.empty()) {
+			Item* item = NULL;
+			cout << "Contains:" << endl;
+			for (auto& pair : contains) {
+				if (pair.first != PLAYER) {
+					list<Entity*>& entities = pair.second;
+					for (Entity* entity : entities) {
+						item = static_cast<Item*>(entity);
+						if (item->description != "") {
+							cout << "\t";
+							item->Look();
+						}
+					}
+				}
+			}
+		}
+	}
+}
+

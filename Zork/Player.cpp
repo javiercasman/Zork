@@ -90,28 +90,96 @@ void Player::Take(const string& item_name)
 	Room* location = static_cast<Room*>(parent); //al final si q tendra q ser una variable de clase eh
 	list<Entity*>& items = location->contains[ITEM];
 	Item* item = NULL;
-	if (items.empty()) cout << "You can't see any such thing" << endl;
+	//if (items.empty()) cout << "You can't see any such thing" << endl;
+	//else if (item_name == "all") {
+	//	for (Entity* itemEntity : items) {
+	//		item = static_cast<Item*>(itemEntity); // Haz el cast a Item
+	//		if (item->can_grab) {
+	//			item->Update(this);
+	//			cout << item->name << ": Taken." << endl;
+	//		}
+	//		else cout << item->name << ": You can\'t take this." << endl;
+	//	}
+	//}
+	//else {
+	//	auto it = find_if(items.begin(), items.end(), [&](Entity* e) {return e->name == item_name;});
+	//	if (it != items.end()) {
+	//		item = static_cast<Item*>(*it);
+	//		if (item->can_grab) {
+	//			item->Update(this);
+	//			cout << "Taken." << endl;
+	//		}
+	//		else cout << "You can\'t take this." << endl;
+	//	}
+	//	else cout << "You can\'t see any such thing." << endl;
+	//}
+	vector<Entity*> items_copy(items.begin(), items.end()); //sino crashea
+	if (items_copy.empty()) cout << "You can't see any such thing" << endl;
 	else if (item_name == "all") {
-		for (Entity* itemEntity : items) {
-			item = static_cast<Item*>(itemEntity); // Haz el cast a Item
+		for (Entity* itemEntity : items_copy) {
+			item = static_cast<Item*>(itemEntity);
 			if (item->can_grab) {
 				item->Update(this);
 				cout << item->name << ": Taken." << endl;
 			}
-			else cout << item->name << ": You can\'t take this." << endl;
+			//else if (item->can_contain && item->is_open && !item->contains.empty()) {
+			//	list<Entity*>& containing_items = item->contains[ITEM];
+			//	Item* containing_item = NULL;
+			//	for (Entity* containing_itemEntity : containing_items) {
+			//		containing_item = static_cast<Item*>(itemEntity);
+			//		if (containing_item->can_grab) {
+			//			containing_item->Update(this);
+			//			cout << containing_item->name << ": Taken." << endl;
+			//		}
+			//		else cout << containing_item->name << ": You can\'t take that." << endl;
+			//	}
+			//}
+			//else cout << item->name << ": You can\'t take that." << endl;
+			else {
+				cout << item->name << ": You can\'t take that." << endl;
+				if (item->can_contain && item->is_open && !item->contains.empty()) {
+					list<Entity*>& containing_items = item->contains[ITEM];
+					vector<Entity*> containing_items_copy(containing_items.begin(), containing_items.end()); //sino crashea
+					Item* containing_item = NULL;
+					for (Entity* containing_itemEntity : containing_items_copy) {
+						containing_item = static_cast<Item*>(containing_itemEntity);
+						if (containing_item->can_grab) {
+							containing_item->Update(this);
+							cout << containing_item->name << ": Taken." << endl;
+						}
+						else cout << containing_item->name << ": You can\'t take that." << endl;
+					}
+				}
+			}
 		}
 	}
-	else {
-		auto it = find_if(items.begin(), items.end(), [&](Entity* e) {return e->name == item_name;});
-		if (it != items.end()) {
-			item = static_cast<Item*>(*it);
-			if (item->can_grab) {
-				item->Update(this);
-				cout << "Taken." << endl;
+	else{
+		for (Entity* itemEntity : items) {
+			item = static_cast<Item*>(itemEntity);
+			if (item->name == item_name) {
+				if (item->can_grab) {
+					item->Update(this);
+					cout << item->name << ": Taken." << endl;
+				}
+				else cout << item->name << ": You can\'t take that." << endl;
+				break;
 			}
-			else cout << "You can\'t take this." << endl;
+			else if (item->can_contain && item->is_open && !item->contains.empty()) {
+				list<Entity*>& containing_items = item->contains[ITEM];
+				Item* containing_item = NULL;
+				for (Entity* containing_itemEntity : containing_items) {
+					containing_item = static_cast<Item*>(containing_itemEntity);
+					if (containing_item->name == item_name) {
+						if (containing_item->can_grab) {
+							containing_item->Update(this);
+							cout << containing_item->name << ": Taken." << endl;
+						}
+						else cout << containing_item->name << ": You can\'t take that." << endl;
+						break;
+					}
+				}
+			}
 		}
-		else cout << "You can\'t see any such thing." << endl;
 	}
 }
 

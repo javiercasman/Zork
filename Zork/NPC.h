@@ -13,6 +13,7 @@ public:
 	int damage_points;
 
 	void Update(Entity* new_parent) override;
+	void Look() override;
 };
 
 #endif //_NPC_INCLUDE

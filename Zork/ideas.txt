@@ -7,8 +7,6 @@
 7. Aun le tengo que encontrar un sentido al Name del Exit, yo quitaría direction la verdad. Al fin y al cabo, el Name de una Entity sirve para los comandos.
 8. algo en item que determine si se puede agarrar, romper, mover...
 
-
-
 IMPORTANTE: cambiar atributos a Private y hacer Getters y Setters. (al final)
 
 "contains" de Player == inventario. Es decir, solo puede contener Item (?)

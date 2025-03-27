@@ -25,7 +25,6 @@ void Room::Look()
 				list<Entity*>& entities = pair.second;
 				for (Entity* entity : entities) {
 					if (entity->description != "") {
-						cout << "\t";
 						entity->Look();
 					}
 				}

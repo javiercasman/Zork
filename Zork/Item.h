@@ -33,6 +33,7 @@ public:
 	int damage_points; //si no se puede coger, sera null, porque solo puedes atacar con objetos de tu inventario
 
 	void Update(Entity* new_parent) override;
+	void Look() override;
 };
 
 #endif // _ITEM_INCLUDE

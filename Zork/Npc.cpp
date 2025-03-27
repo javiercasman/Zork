@@ -1,5 +1,6 @@
 #include <iostream>
 #include "NPC.h"
+#include "Item.h"
 
 using namespace std;
 
@@ -18,4 +19,25 @@ void Npc::Update(Entity* new_parent)
 	parent->contains[NPC].remove(this);
 	parent = new_parent;
 	parent->contains[NPC].push_back(this);
+}
+
+void Npc::Look()
+{
+	cout << description << endl;
+	if (!contains.empty()) {
+		Item* item = NULL;
+		cout << "The " << name << "carries:" << endl;
+		for (auto& pair : contains) {
+			if (pair.first != PLAYER) {
+				list<Entity*>& entities = pair.second;
+				for (Entity* entity : entities) {
+					item = static_cast<Item*>(entity);
+					if (item->description != "") {
+						cout << "\t";
+						item->Look();
+					}
+				}
+			}
+		}
+	}
 }

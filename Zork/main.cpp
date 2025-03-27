@@ -55,7 +55,7 @@ int main() {
 		else if (!world.Parser(tokens)) cout << "That's not a verb I recognise.\n";
 		// posibilidad para meter quit y restart en Parser: eliminamos el primer if, y despues de este else if metemos un else, donde comprobemos si tokens[0] es quit o restart
 
-		//ahora le pasa el input al world, este se encarga de parsearlo para poder gestionar las entidades7
+		//ahora le pasa el input al world, este se encarga de parsearlo para poder gestionar las entidades7+
 	}
 	cout << "Bye!\n";
 	return 0;

@@ -24,6 +24,7 @@ public:
 	Item* block;
 
 	void Update(Entity* new_parent) override;
+	void Look() override {};
 };
 
 #endif // _EXIT_INCLUDE
