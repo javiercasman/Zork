@@ -30,7 +30,7 @@ Here is a map to guide yourself during the game:
 
 ![alt text](https://github.com/javiercasman/Zork/blob/main/Zork/map.png?raw=true)
 
-To end the game, you have to find the Amulet at the Gallery, then use it in the Garden. However, there is a hostile Troll guarding it, lurking around the Cellar and its surroundings! You must kill him to get the key that will you allow to escape from the house.
+To end the game, you have to find the Amulet at the Gallery, then use it in the Garden. However, there is a hostile Troll guarding it, lurking around the Cellar and its surroundings! You must kill him (strongly recommended doing it with the Sword found at the Entry) to get the key that will you allow to escape from the house.
 
 ## 5. Unique features
 I added some extra features that were not included on the main ones at the PDF, you could notice some of them on the commands list. These are:
